@@ -225,7 +225,27 @@ This method returns the character at the specified index if that's a valid index
 
 For full credit, your `charAt` method should be more efficient. Specifically, you should maintain *state* (in this case, storing information in instance variables) so that after a call of `charAt(k)` the call of `charAt(k+1)` is a constant time operation.
 
-To do this, you should appropriately update the following  instance variables: one for the current node in a sequence of calls of `charAt`, one for the current index into that node, and one for the overall count; these are explained below. 
+### Basic, Correct but Inefficient Implementation of charAt
+First we'll show an inefficient implementation of the charAt method --- a method to find a character at a specific index in a linked list of strings. Your code will need to traverse the linked list counting characters. The code below illustrates how to do this. It doesn't check to see if parameter index is valid, but it passes the JUnit tests for correctness.
+
+```java
+public int charAt(int index) {
+     int count = 0;
+	int dex = 0;
+	Node list = myFirst;
+	while (count != index) {
+		count++;
+		dex++;
+		if (dex >= list.info.length()) {
+			dex = 0;
+			list = list.next;
+		}
+	}
+     return list.info.charAt(dex);
+}
+```
+
+This code will pass correctness tests, e.g., in `TestIterator`. However, it's not efficient since it starts at the beginning of the linked list for each call. You should be sure you understand how local variables `count` and `dex` are used in the code above before trying to make the code more efficient for a sequence of calls by ensuring you appropriately update the following  instance variables: one for the current node in a sequence of calls of `charAt`, one for the current index into that node, and one for the overall count; these are explained below. 
 
 - `myIndex` is the value of the parameter in the last call to `charAt`. This means that if a call to `s.charAt(100)` is followed by `s.charAt(101)` the value of `myIndex` will be 100 after `s.charAt(100)` executes and `myIndex` will be 101 after `s.charAt(101)` executes.
 - `myLocalIndex` is the value of the index *within the string stored in the node last-referenced* by `charAt` when the method finishes. For example, suppose a strand consists of three nodes: the first has 60 characters; followed by a node of 30 characters; followed by a node of 40 characters. The call `s.charAt(40)` will mean that `myIndex` is 40 and `myLocalIndex` is also 40 since that's the index within the first node of the list, where the character whose index is 40 is found.  Suppose this is followed by `s.charAt(70).` The character at index 60 of the entire strand will be the character with index zero of the second node -- since the first node holds characters with indexes 0-59 since its info field is a string of 60 characters. The character at index 70 of the entire strand will be the character with index 10 of the second node. This means that after the call `charAt(70)` the value of `myIndex` will be 70, the value of `myLocalIndex` will be 10, and the value of `myCurrent` (see just below) is a pointer to the second node of a three-node list.
