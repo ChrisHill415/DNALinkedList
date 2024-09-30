@@ -1,6 +1,6 @@
 # Project 3: DNA
 
-This is the directions document for Project 3 DNA in CompSci 201 at Duke University, Fall 2023.
+This is the directions document for Project 3 DNA in CompSci 201 at Duke University, Fall 2024.
 
 **See [the details document](docs/details.md) for information** on using Git, starting the project, and more details about the project including information about the classes and concepts that are outlined briefly below. You'll absolutely need to read the information in the [details document](docs/details.md) to understand how the classes in this project work independently and together. The _details_ document also contains project-specific details, this document provides a high-level overview of the assignment.
 
@@ -16,7 +16,7 @@ Here are the major parts of the assignment.
 	1. You'll create an inner `Node` class with instance variables `myFirst` and `myLast` and you'll then implement all the methods in the `IDnaStrand` interface, _**testing them using supplied JUnit tests.**_ 
 	2. When you create the class and edit it so that it implements IDnaStrand, VSCode can fill in stub methods that you will implement. There are two constructors and several methods. You should read the comments in the `IDnaStrand` interface and use the existing implementations `StringStrand` and `StringBuilderStrand` to understand what these methods do. 
 3. In [Part 3](#part-3-analysis-and-more-benchmarking) Rerun the benchmarking program `DNABenchmark` with the newly coded `LinkStrand` class - note the efficiency and memory of the program compared to when you ran the program with StringStrand and StringBuilderStrand.
-4. You'll make changes to `DNABenchmark` to run more benchmark code to answer questions in the analysis.
+4. You'll make changes to `DNABenchmark` to run additional benchmark code to answer questions in the analysis.
 
 ## Outline
 - [Background and Introduction](#project-background-and-introduction)
@@ -34,9 +34,10 @@ Specifically, you will develop a `LinkStrand` class, an implementation of the `I
 The simulation coded here is a simplification of the chemical process, but provides an example of the utility of linked lists as a data structure for certain algorithmic processes.
 
 <details>
-<summary>Optional Historical Details</summary>
+<summary>Engagement Points: Optional Historical Details</summary>
 
-This background is interesting, but not really needed to do the assignment. There are some good stories here, but if you want to get to the assignment, you can skip this section.
+This background is interesting, but not really needed to do the assignment. There are some good stories here, but if you want to get to the assignment, you can skip this section. However, there are pre-project Engagement Points possible here. 
+
 [Three scientists shared the Nobel Prize](http://nobelprize.org/nobel_prizes/medicine/laureates/1978/press.html) in 1978 for the discovery of restriction enzymes. They're also an essential part of the process called [PCR polymerase chain reaction](http://en.wikipedia.org/wiki/Polymerase_chain_reaction) which is one of the most significant discoveries/inventions in chemistry and for which Kary Mullis won the Nobel Prize in 1993.
 
 Kary Mullis, the inventor of PCR, is an interesting character. To see more about him see this archived copy of a [1992 interview in Omni Magazine](http://web.archive.org/web/20010121194200/http://omnimag.com/archives/interviews/mullis.html) or his [personal website](http://karymullis.com/) which includes information about his autobiography Dancing Naked in the Mind Field, though you can read this free [Nobel autobiography](https://www.nobelprize.org/prizes/chemistry/1993/mullis/biographical/) as well.
@@ -53,7 +54,7 @@ different classes model DNA by implementing the `IDnaStrand` interface.
 
 ## Part 1: Running DNABenchmark, Profiling, Analysis
 
-You can do this Part 1 _without writing any linked list code_. We encourage you do this before starting on Part 2 of the assignment where you will program a linked list. *There is a bonus for submitting timing of Part 1 before Fall Break!* **Three points on this project for submitting timing data if you simply copy/paste the results of running `DNABenchmark` twice -- with `StringStrand` and again with `StringBuilderStrand` which you can do by commenting/uncommenting lines at the top of the file, lines 18-20.** You can think about the analysis for this part, but simply uploading a PDF of the output will get the three points.
+You can do this Part 1 _without writing any linked list code_. We encourage you do this before starting on Part 2 of the assignment where you will program a linked list. *There is a bonus for submitting timing of Part 1 before Fall Break!* **Three points on this project for submitting timing data if you simply copy/paste the results of running `DNABenchmark` twice -- with `StringStrand` and again with `StringBuilderStrand` which you can do by commenting/uncommenting lines at the top of the `DNABenchmark.java` file, lines 18-20.** You can think about the analysis for this part, but simply uploading a PDF of the output will get the three points.
 
 ### `cutAndSplice` Simulation Complexity with `StringStrand` an `StringBuilderStrand`
 
