@@ -7,7 +7,7 @@ Many parts of the assignment, including workflow and the classes you use and wri
 
 We'll be using Git and the installation of GitLab at [coursework.cs.duke.edu](https://coursework.cs.duke.edu). All code for classwork will be kept here. Git is software used for version control, and GitLab is an online repository to store code in the cloud using Git.
 
-**[This document details the workflow](https://coursework.cs.duke.edu/201fall23/resources-201/-/blob/main/projectWorkflow.md) for downloading the starter code for the project, updating your code on coursework using Git, and ultimately submitting to Gradescope for autograding.** We recommend that you read and follow the directions carefully this first time working on a project! While coding, we recommend that you periodically (perhaps when completing a method or small section) push your changes as explained in below.
+**[This document details the workflow](https://coursework.cs.duke.edu/201fall24/resources-201/-/blob/main/projectWorkflow.md) for downloading the starter code for the project, updating your code on coursework using Git, and ultimately submitting to Gradescope for autograding.** We recommend that you read and follow the directions carefully when working on a project! While coding, we recommend that you periodically (perhaps when completing a method or small section) push your changes as explained.
 
 ## DNA strands and the Starter Code
 
@@ -15,11 +15,11 @@ For the purposes of this project, DNA is represented as a sequence of characters
 
 To get started you should read the comments in the `IDnaStrand` interface to understand what functionality implementations of that interface should provide with respect to manipulating DNA data. You will note that some methods in the interface have a `default` implementation provided, but most do not -- these are the methods you will be implementing. The `default` method `cutAndSplice` is the one that is benchmarked by the code provided in `DNABenchmark`, see [Part 1](#part-1-running-dnabenchmark-profiling-analysis) for a discussion of that method and its complexity.
 
-Two relatively straightforward implementations of the `IDnaStrand` interface are provided in the starter code. `StringStrand` represents a DNA sequence as a simple String. `StringBuilderStrand` represents a DNA sequence as a  [`StringBuilder`](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/StringBuilder.html). You can look at these two classese to see simple and correct (but not necessarily efficient) implementations of the functionality specified in the `IDnaStrand` interface.
+Two relatively straightforward implementations of the `IDnaStrand` interface are provided in the starter code. `StringStrand` represents a DNA sequence as a simple String. `StringBuilderStrand` represents a DNA sequence as a  [`StringBuilder`](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/StringBuilder.html). You can look at these two classese to see simple and correct (but not necessarily efficient) implementations of the functionality specified in the `IDnaStrand` interface.
 
 ## Complexity of cutAndSplice
 
-The method `cutAndSplice` is not a mutator. It starts with a strand of DNA and creates a new strand by finding each and every occurrence of a restriction enzyme like `“gaattc”` and replacing this enzyme by a specified splicee -- another strand of DNA. If `dna` represents the strand `"cgatcctagatcgg"` then the call 
+The method `cutAndSplice` is *not a mutator*. It starts with a strand of DNA and *creates a new strand* by finding each and every occurrence of a restriction enzyme like `“gaattc”` and replacing this enzyme by a specified splicee -- another strand of DNA. If `dna` represents the strand `"cgatcctagatcgg"` then the call 
 
 ```java
 dna.cutAndSplice("gat", "gggtttaaa")
@@ -44,7 +44,7 @@ The runtime and memory complexity for `cutAndSplice` can be expressed as a funct
 
 ## Part 1 Running DNABenchmark
 
-You select which implementation to use changing the value of the static instance variable `strandType` at the top of the class file. Note that the `StringStrand` class may take several seconds to run on `ecoli_small.txt`. `StringBuilderStrand` can scale to `ecoli.txt`, but you may not want to run `StringStrand` on the larger data set as it may take several minutes to run.
+You select which implementation to use changing the value of the static instance variable `strandType` at the top of the class file. Note that the `StringStrand` class may take several seconds to run on `ecoli.txt`. `StringBuilderStrand` scale better, but you may not want to run `StringStrand` on the larger data file if your laptop is old as it may take several minutes to run.
 
 The main method benchmarks the average time (over several trials)  in milliseconds that it takes to run `cutAndSplice` for different values of N (the size of the original dna strand), b (the number of breaks / occurrences of the `enzyme`), and S (the size of the `splicee`). It also shows the size of the resulting recombininant new Strand, labeled as `recomb`, which is roughly equal to N + bS. 
 
@@ -99,14 +99,15 @@ StringBuil:   5,122,560      10,000    12,318,240        15       720
 ## Part 2: Programming LinkStrand
 
 You need to implement two constructors as described below.
-The constructors and methods don't need to be implemented in the order shown there, but the simpler methods are listed first. These methods are tested in the `TestStrand` class.
+The constructors and methods don't need to be implemented in the order shown there, but the simpler methods are listed first. These methods are tested in the `TestStrand` class, but you'll need to change the type of `IDNAStrand` in the testing
+class in the method `getNewStrand` (lines 34-38).
 
 ### 1. `LinkStrand` State, Constructors and `initialize` Method
-Implement two constructors: one with no parameters (the default constructor) and one with a `String` parameter. The constructors work by calling the required initialize method. Refer to `StringStrand.java` for an example to adapt. Implement the initialize method that initializes the `LinkStrand` object with a `String`.
+Implement two constructors: one with no parameters (the default constructor) and one with a `String` parameter. The constructors work by calling the required `initialize` method. Refer to `StringStrand.java` for an example to adapt. Implement the `initialize` method that creates/initializes the `LinkStrand` object with a `String`.
 
 #### Details on LinkStrand State, Constructors and initialize Method
 
-You should start by defining a `private` inner `Node` class (that is, defined inside of the `LinkStrand` class) that defines a node in the `LinkStrand`. Each such node should store at least a `String` (referred to as `info` in this writeup) and a reference to the next node in the list. You will also need to define a constructor for your inner class.
+You should start by defining a `private` inner `Node` class (that is, defined inside of the `LinkStrand` class) that defines a node in the `LinkStrand`. Each such node should store at least a `String` (referred to as `info` in this writeup) and a reference to the next node in the list. You will also need to define a constructor for your inner `Node` class.
 
 After you have defined your node class, you should use the following instance variables definitions for the `ListStrand` class.
 
@@ -123,7 +124,7 @@ private int myLocalIndex;
 1. `myFirst` references the first node in a linked list of nodes.
 2. `myLast` references the last node in a linked list of nodes.
 3. `mySize` represents the total number of characters stored in all nodes together.
-4. `myAppends` is the number of times that the append method has been called. It would be useful to think of this as one less than the number of nodes in the linked list.
+4. `myAppends` is the number of times that the append method has been called. It might be useful to think of this as one less than the number of nodes in the linked list.
 
 The following instance variables will be updated in `charAt()`:
 1. `myIndex` tracks the last character we accessed with the `charAt()` method. Initialize this as `0`.
@@ -140,7 +141,7 @@ As described above, you'll create two constructors. The string constructor shoul
 
 The `initialize` method will initialize instance variables and maintain the class invariants when it's called. Create a one-node list
 in `initialize` and make sure that both `myFirst` and `myLast` reference/point to this Node. That will ensure part of the class invariant
-is true.
+is true. You must also initialize `mySize`.
 
 ### 2. Implementing the `getInstance` and `size` Methods
 Implement the `getInstance` method that works similarly to what you see in `StringStrand` and `StringBuilder` strand. This must return a `LinkStrand` object. 
@@ -173,14 +174,14 @@ Note that maintaining the class invariant after this call to append would requir
 3. `mySize` is incremented by six
 4. `myAppends` is incremented by one (because a new node is added).
 
-Note that `.append` returns an `IDnaStrand` object. This is the object that was just modified/appended to. However, the method append does not create a new `IDnaStrand` object. The `.append` method is a mutator -- it changes the internal state of the `IDnaStrand` object on which it's invoked, and then returns this `LinkStrand` object itself. Look carefully at both `StringStrand` and `StringBuilderStand` strand to see what to return.
+Note that `.append` returns an `IDnaStrand` object. This is the object that was just modified/appended to. However, the method append does not create a new `IDnaStrand` object. The `.append` method *is a mutator* -- it changes the internal state of the `IDnaStrand` object on which it's invoked, and then returns this `LinkStrand` object itself. Look carefully at both `StringStrand` and `StringBuilderStand` strand to see what to return.
 
 Note that after implementing `append`, the method `getAppendCount` should return the correct result, the value of instance variable `myAppends` that's maintained by the class invariants and initialized/updated in `initialize` and `append`.
 
 
 
 ### 4. Implementing the `toString` Method
-Implement `toString`. This returns the `String` representation of the `LinkStrand` by looping over nodes and appending their values to a `StringBuilder` object. The method should run in `O(N)` time for a stand with `N` nucleotides.
+Implement `toString`. This returns the `String` representation of the `LinkStrand` by looping over nodes and appending their values to a `StringBuilder` object. The method should run in `O(N)` time for a stand with `N` nucleotides. You must use a `StringBuilder` object as you loop over nodes. After looping over all nodes, call the `StringBuilder.toString` method to obtain the String to return.
 
 #### Details on Implementing the toString Method
 
@@ -188,7 +189,7 @@ The `toString` method returns the `String` representation of the entire DNA stra
 
 This method should use a standard `while` loop to visit each node in the internal linked list. The method creates and updates a single `StringBuilder` object by appending each `node.info` field to a `StringBuilder` object that's initially empty. The final return from `LinkStrand.toString` will simply be returning the result of calling `.toString()` on the `StringBuilder` object.
 
-For more guidance on `StringBuilder`, see the [Java Documentation here](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/StringBuilder.html). 
+For more guidance on `StringBuilder`, see the [Java Documentation here](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/StringBuilder.html). 
 
 You should be able to test all the methods implemented to this point using the class `TestStrand`. The testing methods in `TestStrand` rely on `.toString` being correct, so after implementing `.toString` you may find errors in your other methods as a result of testing.
 
@@ -199,7 +200,7 @@ Implement `reverse` to return a new `LinkStrand` object that's the reverse of th
 
 This method creates a new `LinkStrand` object that is the reverse of the object on which it's called. The reverse of `"cgatccgg"` is `"ggcctagc"`. This method returns a new strand; **it does not alter the strand on which it's called**, i.e., it's not a mutator. 
 
-You should create a new linked list with nodes in reverse order, and each string in each node also reversed. Put differently: The reversed `LinkStrand` you return should have the same number of nodes as the original `LinkStrand`, but in reverse order; each internal node should also contain the reversed `String` of the corresponding node in the original `LinkStrand`. 
+You should create a new linked list with nodes in reverse order, and with each string in each node also reversed. Put differently: The reversed `LinkStrand` you return should have the same number of nodes as the original `LinkStrand`, but in reverse order; each internal node should also contain the reversed `String` of the corresponding node in the original `LinkStrand`. 
 
 For example, if the original `LinkStrand` looks like
 <div align="center">
@@ -211,10 +212,9 @@ then the `LinkStrand` returned by `reverse` should look like the following:
 </div>
 with no changes to the original.
 
-The easiest way (and an efficient way) to reverse a `String` in Java is to use [`StringBuilder` and the `reverse` method](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/StringBuilder.html#reverse()).
+The easiest way (and an efficient way) to reverse a `String` in Java is to use [`StringBuilder` and the `reverse` method](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/StringBuilder.html#reverse()).
 
-Be sure to update all instance variables of the new reversed `LinkStrand` you are creating to be correct before it is returned. You may need to do this
-directly by assigning values to the instance variables of the new `LinkStrand` object.
+Be sure to update all instance variables of the new reversed `LinkStrand` you are creating to be correct before it is returned. You may need to do this directly by assigning values to the instance variables of the new `LinkStrand` object. *Recall that you can access the private instance variables of the new `LinkStrand` object being returned!*
 
 ### Implementing the `charAt` Method
 Implement `charAt` which returns the character at a specific index. This method requires new instance variables *to meet performance characteristics.*
@@ -245,9 +245,9 @@ public int charAt(int index) {
 }
 ```
 
-This code will pass correctness tests, e.g., in `TestIterator`. However, it's not efficient since it starts at the beginning of the linked list for each call. You should be sure you understand how local variables `count` and `dex` are used in the code above before trying to make the code more efficient for a sequence of calls by ensuring you appropriately update the following  instance variables: one for the current node in a sequence of calls of `charAt`, one for the current index into that node, and one for the overall count; these are explained below. 
+This code will pass correctness tests, e.g., in `TestIterator`. However, it's not efficient since it starts at the beginning of the linked list for each call. You should be sure you understand how local variables `count` and `dex` are used in the code above before trying to make the code more efficient. You'll work to make the code efficience for a sequence of calls in which index is incremented by one, e.g., `.charAt(k)` followed by `.charAt(k+1)` by ensuring you appropriately update the following  instance variables: one for the current node in a sequence of calls of `charAt`, one for the current index into that node, and one for the overall count; these are explained below. 
 
-- `myIndex` is the value of the parameter in the last call to `charAt`. This means that if a call to `s.charAt(100)` is followed by `s.charAt(101)` the value of `myIndex` will be 100 after `s.charAt(100)` executes and `myIndex` will be 101 after `s.charAt(101)` executes.
+- `myIndex` is the value of the parameter in the _last call_ to `charAt`. This means that if a call to `s.charAt(100)` is followed by `s.charAt(101)` the value of `myIndex` will be 100 after `s.charAt(100)` executes and `myIndex` will be 101 after `s.charAt(101)` executes.
 - `myLocalIndex` is the value of the index *within the string stored in the node last-referenced* by `charAt` when the method finishes. For example, suppose a strand consists of three nodes: the first has 60 characters; followed by a node of 30 characters; followed by a node of 40 characters. The call `s.charAt(40)` will mean that `myIndex` is 40 and `myLocalIndex` is also 40 since that's the index within the first node of the list, where the character whose index is 40 is found.  Suppose this is followed by `s.charAt(70).` The character at index 60 of the entire strand will be the character with index zero of the second node -- since the first node holds characters with indexes 0-59 since its info field is a string of 60 characters. The character at index 70 of the entire strand will be the character with index 10 of the second node. This means that after the call `charAt(70)` the value of `myIndex` will be 70, the value of `myLocalIndex` will be 10, and the value of `myCurrent` (see just below) is a pointer to the second node of a three-node list.
 
 <div align="center">
@@ -290,7 +290,7 @@ Note that the `IDnaStrand` object referenced by `this` is then stored in the `Ch
 You only need to implement `charAt`, then *all the code described and shown above will work correctly!* You will need to initialize the instance variables too.
 
 ### Order of Calls Matters
-However, *you'll need to write code to deal with calls that aren't "in order".* If the call `.charAt(100)` is followed by the call `.charAt(30)` you'll need to start at the beginning of the internal linked list to find the character with index 30. If `.charAt(100)` is followed by `.charAt(350)` you won't start at the first node, but continue with the values stored in the instance variables.
+However, *you'll need to write code to deal with calls that aren't "in order".* If the call `.charAt(100)` is followed by the call `.charAt(30)` you'll need to start at the beginning of the internal linked list to find the character with index 30. If `.charAt(100)` is followed by `.charAt(350)` you won't start at the first node, but continue with the values stored in the instance variables. To start at the beginning/first-node, you'll re-initialize the three variables `myIndex`, `myLocalIndex`, and `myCurrent` as you did in the constructor for `ListStrand`, i.e., so that your code starts at the beginning of the internal linked list.
 
 ## Complexity of LinkStrand method `cutAndSplice`
 
