@@ -218,7 +218,7 @@ with no changes to the original.
 
 The easiest way (and an efficient way) to reverse a `String` in Java is to use [`StringBuilder` and the `reverse` method](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/StringBuilder.html#reverse()).
 
-Be sure to update all instance variables of the new reversed `LinkStrand` you are creating to be correct before it is returned. You may need to do this directly by assigning values to the instance variables of the new `LinkStrand` object. *Recall that you can access the private instance variables of the new `LinkStrand` object being returned!*
+Be sure to update all instance variables of the new reversed `LinkStrand` you are creating to be correct before it is returned. You may need to do this directly by assigning values to the instance variables of the new `LinkStrand` object. *Recall that you can access the private instance variables of the new `LinkStrand` object being returned!* In particular, remember to update `mySize` and `myAppends` of the _newly created_ `LinkStrand` object.
 
 ### Implementing the `charAt` Method
 Implement `charAt` which returns the character at a specific index. This method requires new instance variables *to meet performance characteristics.*
