@@ -8,7 +8,7 @@ This is the directions document for Project 3 DNA in CompSci 201 at Duke Univers
 
 Here's a high-level view of the assignment. This is enough information to know what to do, but not necessarily how to do it. For details, you can **refer to sections in [the details document](docs/details.md)**.
 
-You'll be developing `LinkStrand`, an implementation of the `IDnaStrand` interface that uses an internal linked list to model recombinant DNA. Your implementation will be much more efficient for modeling DNA splicing operations than using a `String` or `StringBuilde` as you will see/demonstrate in your empirical timing benchmarks.
+You'll be developing `LinkStrand`, an implementation of the `IDnaStrand` interface that uses an internal linked list to model recombinant DNA. Your implementation will be much more efficient for modeling DNA splicing operations than using a `String` or `StringBuilder` as you will see in your empirical timing benchmarks.
 
 Here are the major parts of the assignment.
 1. In [Part 1](#part-1-running-dnabenchmark-profiling-analysis) you will run the benchmarking program before you write code as part of answering questions in the analysis section.
@@ -16,7 +16,7 @@ Here are the major parts of the assignment.
 	1. You'll create an inner `Node` class with instance variables `myFirst` and `myLast` and you'll then implement all the methods in the `IDnaStrand` interface, _**testing them using supplied JUnit tests.**_ 
 	2. When you create the class and edit it so that it implements IDnaStrand, VSCode can fill in stub methods that you will implement. There are two constructors and several methods. You should read the comments in the `IDnaStrand` interface and use the existing implementations `StringStrand` and `StringBuilderStrand` to understand what these methods do. 
 3. In [Part 3](#part-3-analysis-and-more-benchmarking) Rerun the benchmarking program `DNABenchmark` with the newly coded `LinkStrand` class - note the efficiency and memory of the program compared to when you ran the program with StringStrand and StringBuilderStrand.
-4. You'll make changes to `DNABenchmark` to run additional benchmark code to answer questions in the analysis.
+4. You might make changes to `DNABenchmark` to run additional benchmark code to answer questions in the analysis.
 
 ## Outline
 - [Background and Introduction](#project-background-and-introduction)
@@ -33,22 +33,20 @@ Specifically, you will develop a `LinkStrand` class, an implementation of the `I
 
 The simulation coded here is a simplification of the chemical process, but provides an example of the utility of linked lists as a data structure for certain algorithmic processes.
 
-<details>
-<summary>Engagement Points: Optional Historical Details</summary>
+### Engagement Points: Optional Historical Details
 
-This background is interesting, but not really needed to do the assignment. There are some good stories here, but if you want to get to the assignment, you can skip this section. However, there are pre-project Engagement Points possible here. 
+This background is interesting, but not really needed to do the assignment. There are some good stories here, but if you want to get to the assignment, you can skip this section. However, *there are pre-project Engagement Points possible here.* 
 
-[Three scientists shared the Nobel Prize](http://nobelprize.org/nobel_prizes/medicine/laureates/1978/press.html) in 1978 for the discovery of restriction enzymes. They're also an essential part of the process called [PCR polymerase chain reaction](http://en.wikipedia.org/wiki/Polymerase_chain_reaction) which is one of the most significant discoveries/inventions in chemistry and for which Kary Mullis won the Nobel Prize in 1993.
+[Three scientists shared the Nobel Prize](http://nobelprize.org/nobel_prizes/medicine/laureates/1978/press.html) in 1978 for the discovery of restriction enzymes. They're also an essential part of the process called [PCR polymerase chain reaction](http://en.wikipedia.org/wiki/Polymerase_chain_reaction) which is one of the most significant discoveries/inventions in chemistry and for which Kary Mullis won/shared the Nobel Prize in 1993.
 
 Kary Mullis, the inventor of PCR, is an interesting character. To see more about him see this archived copy of a [1992 interview in Omni Magazine](http://web.archive.org/web/20010121194200/http://omnimag.com/archives/interviews/mullis.html) or his [personal website](http://karymullis.com/) which includes information about his autobiography Dancing Naked in the Mind Field, though you can read this free [Nobel autobiography](https://www.nobelprize.org/prizes/chemistry/1993/mullis/biographical/) as well.
 
 The simulation is a simplification of the chemical process, but provides an example of the utility of linked lists in implementing a data structure. The linked list code you'll write and reason about is an example of a chunk list.
 
-For pre-coding engagement points (six) [complete this form](https://bit.ly/p3-pre-engage-2024)
+*For pre-coding engagement points (six) [complete this form](https://bit.ly/p3-pre-engage-2024).*
  
-</details>
 
-### DNA strands and the Starter Code
+## DNA strands and the Starter Code
 
 **The [the details document](docs/details.md#DNA-strands-and-the-Starter-Code) has information** about how DNA strands are modeled in this assignment. Read that document for an explanation of the classes and the `IDndStrand` interface. It's important to understand what a Strand is and how
 different classes model DNA by implementing the `IDnaStrand` interface.
@@ -56,7 +54,7 @@ different classes model DNA by implementing the `IDnaStrand` interface.
 
 ## Part 1: Running DNABenchmark, Profiling, Analysis
 
-You can do this Part 1 _without writing any linked list code_. We encourage you do this before starting on Part 2 of the assignment where you will program a linked list. *There is a bonus for submitting timing of Part 1 before Fall Break!* **Four engagement points on this project for submitting timing data if you simply copy/paste the results of running `DNABenchmark` twice -- with `StringStrand` and again with `StringBuilderStrand` which you can do by commenting/uncommenting lines at the top of the `DNABenchmark.java` file, lines 17-20.** You can think about the analysis for this part, but simply pasting the results of the output will get the three points. Submit [output results using this form](https://bit.ly/p3-output-2024)
+You can do this Part 1 _without writing any linked list code_. We encourage you do this before starting on Part 2 of the assignment where you will program a linked list. *There is an engagement bonus for submitting timing of Part 1 before Fall Break!* **Four engagement points on this project for submitting timing data if you simply copy/paste the results of running `DNABenchmark` twice -- with `StringStrand` and again with `StringBuilderStrand` which you can do by commenting/uncommenting lines at the top of the `DNABenchmark.java` file, lines 17-20.** You can think about the analysis for this part, but simply pasting the results of the output will get the three points. Submit [output results using this form](https://bit.ly/p3-output-2024)
 
 ### `cutAndSplice` Simulation Complexity with `StringStrand` an `StringBuilderStrand`
 
@@ -112,12 +110,12 @@ The following questions refer to the parameters:
 - b: the number of breaks / occurrences of the `enzyme`, and 
 - S: the size of the `splicee`.  
 
-Several questions refer to the runtime complexity of the `cutAndSplice` method. You may assume the following about this method:
+Several questions refer to the runtime complexity of the `cutAndSplice` method. You may _assume the following_ about this method:
 - The loop that searches for occurrences of `enzyme` using `indexOf` is O(N) for a strand with N nucleotides/length == N.
 - The size of the enzyme is negligibly small, i.e., you can ignore subtracting the size of the enzymes from the length/runtime of the results.
 - The fragments of the original strand between each added splicee are all approximately the same length, roughly N/b.
 
-Note that given these assumptions the original strand has length N, and the newly constructed strand has length N + bS, since each of b neglibly small occurrences of `enzyme` are replaced by a `splicee` whose size is S. Simply appending/concatenating a String of size S to a `StringBuilder` b times will take runtime O(bS) given what we've discussed in class about how StringBuilder works.  However, as we discussed in class, appending a String S to a `String` b times results in creating Strings S, SS, SSS, SSS, and so on (ignoring what comes between the splicees for now). This happens b times, so the last String has b occurrences of S and the total runtime is SSS..S (b times) so the total time to create all strings is (1+2+...+b)S which is O(b<sup>2</sup>S). When `LinkStrand` is used, be attentative to the diagram **at the end of [the details document](docs/details.md) document for information** that will help you reason about the runtime and the storage used.
+Note that given these assumptions the original strand has length N, and the newly constructed strand has length N + bS, since each of b neglibly small occurrences of `enzyme` are replaced by a `splicee` whose size is S. Simply appending/concatenating a String of size S to a `StringBuilder` b times will take runtime O(bS) given what we've discussed in class about how `StringBuilder` works.  However, as we discussed in class, appending a String S to a `String` b times results in creating Strings S, SS, SSS, SSS, and so on (ignoring what comes between the splicees for now). This happens b times, so the last String has b occurrences of S and the total runtime is SSS..S (b times) so the total time to create all strings is (1+2+...+b)S which is O(b<sup>2</sup>S). When `LinkStrand` is used, be attentative to the diagram **at the end of [the details document](docs/details.md) document for information** that will help you reason about the runtime and the storage used.
 
 **Question 1:** What is the big O asymptotic runtime complexity of `cutAndSplice` when using `StringStrand`, in terms of N, b, and S? Justify your answer in theory, referencing the implementation, and empirically, by reporting and discussing your results from running `DNABenchmark`. Do you empirical results match your theoretical expectations? Briefly explain.
 
@@ -125,7 +123,7 @@ Note that given these assumptions the original strand has length N, and the newl
 
 **Question 3:** If each character of a `String` takes 1 byte of memory to store, about how much total memory is necessary to store the result of a `cutAndSplice` operation on a `StringStrand` object? Express your answer in terms of N, b, and S. Would the result take more or less memory if using a `StringBuilderStrand` object? Briefly explain.
 
-**Question 4:** What is the big O asymptotic runtime complexity of `cutAndSplice` when using `LinkStrand` in terms of N, b, and S? Justify your answer in theory, referencing the implementation, and empirically, by reporting your results from running `DNABenchmark`. Do you empirical results match your theoretical expectations? Briefly explain.
+**Question 4:** What is the big-Oh asymptotic runtime complexity of `cutAndSplice` when using `LinkStrand` in terms of N, b, and S? Justify your answer in theory, referencing the implementation, and empirically, by reporting your results from running `DNABenchmark`. Do you empirical results match your theoretical expectations? Briefly explain.
 
 **Question 5:** If each character of a `String` takes 1 byte of memory to store, and each reference to a node takes 8 bytes of memory to store, about about how much total memory is necessary to store the result of a `cutAndSplice` operation on a `LinkStrand` object? Express your answer in terms of N, b, and S. Briefly explain your answer, refereincing the implementation of `LinkStrand`. 
 
@@ -141,13 +139,13 @@ Don't forget to upload a PDF for the analysis part of this assignment and mark w
 | Points | Grading Criteria |
 | ------ | ------ |
 | 16 | Code for LinkStrand. This includes 4 for correct and efficient implementation of .charAt method, as well as 2 for API consistency. |
-| 12 | Analysis questions answered. UTAs will grade and comment on this.  |
-| 2 | video of starting coding (for Part II)|
+| 10 | Analysis questions answered. UTAs will grade and comment on this.  |
+
 
 We will map total points you earn to scores as follows. For example, 24 is an A- and 30 is an A+.
-- 24-30:  A
-- 18-23:  B
-- 12-17:  C
+- 22-26:  A
+- 17-21:  B
+- 12-16:  C
 - 6-11:  D
 
 
