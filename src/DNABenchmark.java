@@ -4,7 +4,7 @@ import java.util.*;
 /**
  * Code for benchmarking the time taken to simulate cutting
  * and splicing strands of DNA. These benchmark methods are
- * intended to be used in reasoning about tradeoffs in using 
+ * intended to be used in reasoning about tradeoffs in using dsss
  * a linked list to represent a strand of DNA and to compare
  * this representation with a simple String representation.
  * @author Owen Astrachan
@@ -24,7 +24,7 @@ public class DNABenchmark {
 	private static final int DEFAULT_SPLICEE = 10000;	// default size of splicee
 	private static final int SPLICEE_ROWS = 8;			// rows of spliceeBenchmark data
 	private static final int SOURCE_ROWS = 5;			// rows of sourceBenchmark data
-	private static final int TRIALS = 10;				// number of trials per run
+	private static final int TRIALS = 5;				// number of trials per run
 	private static final int MEMORY_TRIALS = 2;
 	
 	private static String mySource;
@@ -33,16 +33,20 @@ public class DNABenchmark {
 			throws Exception {
 		// Set the data file to benchmark here
 		String fileName = "data/ecoli_small.txt";
+
 		File file = new File(fileName);
 		mySource = dnaFromScanner(new Scanner(file));
 
 		printHeader();
 		spliceeBenchmark();
 		sourceBenchmark();
-		System.out.println("--------------- Memory Exhaustion Benchmark ---------------");
 
 		/**
 		 *  Set the large data file to benchmark here
+		 **/ 
+
+		 /**  
+		  * Not doing memory exhaustion Fall 2024, could be done another time
 		fileName = "data/ecoli.txt";
 		file = new File(fileName);
 		mySource = dnaFromScanner(new Scanner(file));
@@ -50,6 +54,7 @@ public class DNABenchmark {
 		System.out.printf("Class\t%23s\t%12s\ttime\t%s\n", "splicee", "recomb","appends");
 		exhaustMemoryBenchmark();
 		**/
+		
 	}
 
 	/**
@@ -119,7 +124,7 @@ public class DNABenchmark {
 			String ret = String.format("%s:%,12d%,12d%,14d%,10d%,10d", 
 				className.substring(0,10), strand.size(), 
 				splicee.length(), recLength, (int) ((after-before) / (1E6*TRIALS)),
-				(recomb.getAppendCount()-1)/2);
+				(recomb.getAppendCount())/2);
 			return ret;
 		} catch (ClassNotFoundException e) {
 			return "could not create class " + className;
@@ -166,6 +171,7 @@ public class DNABenchmark {
 	}
 
 	public static void exhaustMemoryBenchmark() throws Exception {
+		System.out.println("--------------- Memory Exhaustion Benchmark ---------------");
 		int startPower = 8;
 		int endPower = 32;
 		boolean firstRun = true;
