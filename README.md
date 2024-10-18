@@ -105,6 +105,8 @@ Recall that `DNABenchmark` simulates a splicing experiment with DNA data. The co
 
 Once you have completed benchmarking, answer the following analysis questions. **Include your answers in the PDF you submit to the analysis assignment for Project 3 in Gradescope.** You can and should complete most of these questions even if you are unable to complete the code for the `LinkStrand` class.
 
+[Template for Answering Analysis Questions](https://courses.cs.duke.edu/compsci201/fall24/assign/p3-analysis.docs)
+
 The following questions refer to the parameters:
 - N: the size of the original dna strand,
 - b: the number of breaks / occurrences of the `enzyme`, and 
@@ -117,15 +119,15 @@ Several questions refer to the runtime complexity of the `cutAndSplice` method. 
 
 Note that given these assumptions the original strand has length N, and the newly constructed strand has length N + bS, since each of b neglibly small occurrences of `enzyme` are replaced by a `splicee` whose size is S. Simply appending/concatenating a String of size S to a `StringBuilder` b times will take runtime O(bS) given what we've discussed in class about how `StringBuilder` works.  However, as we discussed in class, appending a String S to a `String` b times results in creating Strings S, SS, SSS, SSS, and so on (ignoring what comes between the splicees for now). This happens b times, so the last String has b occurrences of S and the total runtime is SSS..S (b times) so the total time to create all strings is (1+2+...+b)S which is O(b<sup>2</sup>S). When `LinkStrand` is used, be attentative to the diagram **at the end of [the details document](docs/details.md) document for information** that will help you reason about the runtime and the storage used.
 
-**Question 1:** What is the big O asymptotic runtime complexity of `cutAndSplice` when using `StringStrand`, in terms of N, b, and S? Justify your answer in theory, referencing the implementation, and empirically, by reporting and discussing your results from running `DNABenchmark`. Do you empirical results match your theoretical expectations? Briefly explain.
+**Question 1:** What is the big O asymptotic runtime complexity of `cutAndSplice` when using `StringStrand`, in terms of N, b, and S? Justify your answer in theory, referencing the implementation, and empirically, by reporting and discussing your results from running `DNABenchmark`. Do your empirical results match your theoretical expectations? Briefly explain.
 
 **Question 2:** What is the big O asymptotic runtime complexity of `cutAndSplice` when using `StringBuilderStrand`, in terms of N, b, and S? Justify your answer in theory, referencing the implementation, and empirically, by reporting and discussing your results from running `DNABenchmark`. Do your empirical results match your theoretical expectations? Briefly explain.
 
 **Question 3:** If each character of a `String` takes 1 byte of memory to store, about how much total memory is necessary to store the result of a `cutAndSplice` operation on a `StringStrand` object? Express your answer in terms of N, b, and S. Would the result take more or less memory if using a `StringBuilderStrand` object? Briefly explain.
 
-**Question 4:** What is the big-Oh asymptotic runtime complexity of `cutAndSplice` when using `LinkStrand` in terms of N, b, and S? Justify your answer in theory, referencing the implementation, and empirically, by reporting your results from running `DNABenchmark`. Do you empirical results match your theoretical expectations? Briefly explain.
+**Question 4:** What is the big-Oh asymptotic runtime complexity of `cutAndSplice` when using `LinkStrand` in terms of N, b, and S? Justify your answer in theory, referencing the implementation, and empirically, by reporting your results from running `DNABenchmark`. Do your empirical results match your theoretical expectations? Briefly explain.
 
-**Question 5:** If each character of a `String` takes 1 byte of memory to store, and each reference to a node takes 8 bytes of memory to store, about about how much total memory is necessary to store the result of a `cutAndSplice` operation on a `LinkStrand` object? Express your answer in terms of N, b, and S. Briefly explain your answer, refereincing the implementation of `LinkStrand`. 
+**Question 5:** If each character of a `String` takes 1 byte of memory to store, and each reference to a node takes 8 bytes of memory to store, about about how much total memory is necessary to store the result of a `cutAndSplice` operation on a `LinkStrand` object? Express your answer in terms of N, b, and S. Briefly explain your answer, referencing the implementation of `LinkStrand`. 
 
 ## Submitting and Grading 
 
