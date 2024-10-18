@@ -27,7 +27,10 @@ public interface IDnaStrand extends Iterable<Character>{
 				ret = getInstance(search.substring(start, pos));
 				first = false;
 			} else {
-				ret.append(search.substring(start, pos));
+			        String addon = search.substring(start,pos);
+				if (addon.length() != 0) {
+					ret.append(search.substring(start, pos));
+				}
 
 			}
 			start = pos + enzyme.length();
