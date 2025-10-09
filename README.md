@@ -1,6 +1,6 @@
 # Project 3: DNA
 
-This is the directions document for Project 3 DNA in CompSci 201 at Duke University, Fall 2024.
+This is the directions document for Project 3 DNA in CompSci 201 at Duke University, Fall 2025.
 
 **See [the details document](docs/details.md) for information** on using Git, starting the project, and more details about the project including information about the classes and concepts that are outlined briefly below. You'll absolutely need to read the information in the [details document](docs/details.md) to understand how the classes in this project work independently and together. The _details_ document also contains project-specific details, this document provides a high-level overview of the assignment.
 
@@ -43,7 +43,7 @@ Kary Mullis, the inventor of PCR, is an interesting character. To see more about
 
 The simulation is a simplification of the chemical process, but provides an example of the utility of linked lists in implementing a data structure. The linked list code you'll write and reason about is an example of a chunk list.
 
-*For pre-coding engagement points (six) [complete this form](https://bit.ly/p3-pre-engage-2024).*
+*For pre-coding engagement points (six) [complete this form](TBD)
  
 
 ## DNA strands and the Starter Code
@@ -54,7 +54,7 @@ different classes model DNA by implementing the `IDnaStrand` interface.
 
 ## Part 1: Running DNABenchmark, Profiling, Analysis
 
-You can do this Part 1 _without writing any linked list code_. We encourage you do this before starting on Part 2 of the assignment where you will program a linked list. *There is an engagement bonus for submitting timing of Part 1 before Fall Break!* **Four engagement points on this project for submitting timing data if you simply copy/paste the results of running `DNABenchmark` twice -- with `StringStrand` and again with `StringBuilderStrand` which you can do by commenting/uncommenting lines at the top of the `DNABenchmark.java` file, lines 17-20.** You can think about the analysis for this part, but simply pasting the results of the output will get the three points. Submit [output results using this form](https://bit.ly/p3-output-2024)
+You can do this Part 1 _without writing any linked list code_. We encourage you do this before starting on Part 2 of the assignment where you will program a linked list. *There is an engagement bonus for submitting timing of Part 1 before Fall Break!* **Four engagement points on this project for submitting timing data if you simply copy/paste the results of running `DNABenchmark` twice -- with `StringStrand` and again with `StringBuilderStrand` which you can do by commenting/uncommenting lines at the top of the `DNABenchmark.java` file, lines 17-20.** You can think about the analysis for this part, but simply pasting the results of the output will get the three points. Submit [output results using this form](TBA)
 
 ### `cutAndSplice` Simulation Complexity with `StringStrand` an `StringBuilderStrand`
 
