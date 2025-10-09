@@ -6,7 +6,7 @@ import java.util.Iterator;
  * method, so performance will be "good" if sequential
  * access via consecutive indexes results in O(n)
  * performance for n calls of .charAt with indexes
- * in order
+ * in order, e.g., 0,1,2,3,...
  * @author ola 
  *
  */

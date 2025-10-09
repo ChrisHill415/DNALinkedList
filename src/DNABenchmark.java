@@ -9,6 +9,7 @@ import java.util.*;
  * this representation with a simple String representation.
  * @author Owen Astrachan
  * @author Brandon Fain
+ * @version 2, revised October 2025
  */
 
 public class DNABenchmark {

@@ -1,7 +1,8 @@
 /**
- * Simple but somewhat efficient implementation of IDnaStrand. \ This
- * implementation uses StringBuilders to represent genomic/DNA data.
+ * Simple but somewhat efficient implementation of IDnaStrand. This
+ * implementation uses Strings to represent genomic/DNA data.
  * @author ola
+ * @version 2, October 2025
  */
 
 public class StringStrand implements IDnaStrand {

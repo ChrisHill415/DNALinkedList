@@ -18,6 +18,7 @@ import java.util.Random;
  * @date October 2016, updated for iterator and no "" strings
  * @date September 2020, updated by Charles Lyu
  * @date October 2022, updated by Emily Du and Havish Malladi
+ * @date October 2025, updated by Owen Astrachan
  */
 
 public class TestStrand {
