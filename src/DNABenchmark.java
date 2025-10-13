@@ -15,8 +15,8 @@ import java.util.*;
 public class DNABenchmark {
 	
 	// Select/uncomment which implementation you want to benchmark
-	private static final String strandType = "StringStrand";
-	//private static final String strandType = "StringBuilderStrand";
+	//private static final String strandType = "StringStrand";
+	private static final String strandType = "StringBuilderStrand";
 	//private static final String strandType = "LinkStrand";
 	
 	
@@ -46,15 +46,12 @@ public class DNABenchmark {
 		 *  Set the large data file to benchmark here
 		 **/ 
 
-		 /**  
-		  * Not doing memory exhaustion Fall 2024, could be done another time
 		fileName = "data/ecoli.txt";
 		file = new File(fileName);
 		mySource = dnaFromScanner(new Scanner(file));
 
 		System.out.printf("Class\t%23s\t%12s\ttime\t%s\n", "splicee", "recomb","appends");
 		exhaustMemoryBenchmark();
-		**/
 		
 	}
 
@@ -125,7 +122,7 @@ public class DNABenchmark {
 			String ret = String.format("%s:%,12d%,12d%,14d%,10d%,10d", 
 				className.substring(0,10), strand.size(), 
 				splicee.length(), recLength, (int) ((after-before) / (1E6*TRIALS)),
-				(recomb.getAppendCount())/2);
+				(recomb.getAppendCount()-1)/2);
 			return ret;
 		} catch (ClassNotFoundException e) {
 			return "could not create class " + className;

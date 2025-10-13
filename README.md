@@ -39,11 +39,18 @@ This background is interesting, but not really needed to do the assignment. Ther
 
 [Three scientists shared the Nobel Prize](http://nobelprize.org/nobel_prizes/medicine/laureates/1978/press.html) in 1978 for the discovery of restriction enzymes. They're also an essential part of the process called [PCR polymerase chain reaction](http://en.wikipedia.org/wiki/Polymerase_chain_reaction) which is one of the most significant discoveries/inventions in chemistry and for which Kary Mullis won/shared the Nobel Prize in 1993.
 
-Kary Mullis, the inventor of PCR, is an interesting character. To see more about him see this archived copy of a [1992 interview in Omni Magazine](http://web.archive.org/web/20010121194200/http://omnimag.com/archives/interviews/mullis.html) or his [personal website](http://karymullis.com/) which includes information about his autobiography Dancing Naked in the Mind Field, though you can read this free [Nobel autobiography](https://www.nobelprize.org/prizes/chemistry/1993/mullis/biographical/) as well.
+Kary Mullis, the inventor of PCR, is an interesting character. To see more about him see this archived copy of a [1992 interview in Omni Magazine](https://web.archive.org/web/20010121194200/http://omnimag.com/archives/interviews/mullis.html) or his [personal website](http://karymullis.com/) which includes information about his autobiography Dancing Naked in the Mind Field, though you can read this free [Nobel autobiography](https://www.nobelprize.org/prizes/chemistry/1993/mullis/biographical/) as well. A copy of his autobiography may be accessible via [Dancing Naked in the Mind Field](https://pearl-hifi.com/11_Spirited_Growth/10_Health_Neg/04_Pandemics/01_AIDS/Dancing_Naked_in_the_Mind_Field.pdf) without copyright permission.
 
 The simulation is a simplification of the chemical process, but provides an example of the utility of linked lists in implementing a data structure. The linked list code you'll write and reason about is an example of a chunk list.
 
-*For pre-coding engagement points (six) [complete this form](TBD)
+**For pre-coding engagement points (six): Read three (or more) of the articles/works above about Kary Mullis and PCR and then [complete this form](https://forms.cloud.microsoft/r/jBdyRwkDqU).** You can complete this anytime before the final deadline for the assignment.
+
+### Early Engagement Benchmark Points
+
+You need to run the `DNABenchmark` (see below) code before you
+write the `LinnkStrand` implementation. If you copy/paste results
+and answer two questions about them before the no-penalty deadline
+you can eary four engagement points. Complete [the form here](https://forms.cloud.microsoft/r/bcsSZ9kfjj).
  
 
 ## DNA strands and the Starter Code
@@ -96,7 +103,8 @@ you'll need to implement and test.
 
 In [Part 1](#part-1-running-dnabenchmark-profiling-analysis) you benchmarked the complexity of the `cutAndSplice` method of the `IDnaStrand` interface using two implementations of that interface provided in the starter code: `StringStrand` and `StringBuilderStrand`. You did this using the main method of `DNABenchmark`. Review the details there for how to run these benchmarks and what they mean.
 
-Now that you have completed your implementation of `LinkStrand`, you should run the  `DNABenchmark` using the `LinkStrand` implementation of the `IDnaStrand` interface. Again use the `ecoli_small.txt` file. Remember to save your results. Once you finish, you should have a total of 3 benchmark results: one for each of the three implementations (`StringStrand`, `StringBuilderStrand`, and `LinkStrand`).
+Now that you have completed your implementation of `LinkStrand`, you should run the  `DNABenchmark` using the `LinkStrand` implementation of the `IDnaStrand` interface. Again use the `ecoli_small.txt` file (except in the memory
+exhaustion section which uses the larger `ecoli.dat`). Remember to save your results. Once you finish, you should have a total of 3 benchmark results: one for each of the three implementations (`StringStrand`, `StringBuilderStrand`, and `LinkStrand`).
 
 Recall that `DNABenchmark` simulates a splicing experiment with DNA data. The complexity of the `StringStrand` and `StringBuilderStrand` implementations was discussed earlier in [Part 1](#part-1-running-dnabenchmark-profiling-analysis). **See [the details document](docs/details.md) for a detailed explanation of the complexity** of the three `IDNAStrand` implementations, including the `LinkStrand` implementation of `cutAndSplice` as well as the explanation below in the _Analysis Questions_ section.
 
@@ -105,7 +113,7 @@ Recall that `DNABenchmark` simulates a splicing experiment with DNA data. The co
 
 Once you have completed benchmarking, answer the following analysis questions. **Include your answers in the PDF you submit to the analysis assignment for Project 3 in Gradescope.** You can and should complete most of these questions even if you are unable to complete the code for the `LinkStrand` class.
 
-[Template for Answering Analysis Questions](https://courses.cs.duke.edu/compsci201/fall24/assign/p3-analysis.docs)
+[Template for Answering Analysis Questions](https://courses.cs.duke.edu/compsci201/fall25/assign/p3-analysis.docx).
 
 The following questions refer to the parameters:
 - N: the size of the original dna strand,

@@ -55,7 +55,8 @@ The runtime and memory complexity for `cutAndSplice` can be expressed as a funct
 
 ## Part 1 Running DNABenchmark
 
-You select which implementation to use changing the value of the static instance variable `strandType` at the top of the class file. Note that the `StringStrand` class may take several seconds to run on `ecoli.txt`. `StringBuilderStrand` scale better, but you may not want to run `StringStrand` on the larger data file if your laptop is old as it may take several minutes to run.
+You select which implementation to use changing the value of the static instance variable `strandType` at the top of the class file. Note that the `StringStrand` class may take a few minutes to run on on the memory exhaustion part
+of the benchmark. `StringBuilderStrand` scales better, but you may not want to run `StringStrand` on the larger data file for memory exhaustion if your laptop is old --- just explain this in your analysis documents/benchmark results.
 
 The main method benchmarks the average time (over several trials)  in milliseconds that it takes to run `cutAndSplice` for different values of N (the size of the original dna strand), b (the number of breaks / occurrences of the `enzyme`), and S (the size of the `splicee`). It also shows the size of the resulting recombininant new Strand, labeled as `recomb`, which is roughly equal to N + bS. 
 
@@ -110,6 +111,8 @@ StringBuil:   2,561,280      10,000     6,159,120        16       360
 StringBuil:   5,122,560      10,000    12,318,240       161       720
 
 ```
+
+**Note, memory exhaustion benchmark results are not shown here.**
 
 ## Part 2: Programming LinkStrand
 
@@ -232,7 +235,7 @@ with no changes to the original.
 
 The easiest way (and an efficient way) to reverse a `String` in Java is to use [`StringBuilder` and the `reverse` method](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/StringBuilder.html#reverse()).
 
-Be sure to update all instance variables of the new reversed `LinkStrand` you are creating to be correct before it is returned. You may need to do this directly by assigning values to the instance variables of the new `LinkStrand` object. *Recall that you can access the private instance variables of the new `LinkStrand` object being returned!* In particular, remember to update `mySize` and `myAppends` of the _newly created_ `LinkStrand` object.
+**Be sure to update all instance variables of the new reversed `LinkStrand` you are creating to be correct before it is returned.** You may need to do this directly by assigning values to the instance variables of the new `LinkStrand` object. *Recall that you can access the private instance variables of the new `LinkStrand` object being returned!* In particular, remember to update `mySize` and `myAppends` of the _newly created_ `LinkStrand` object.
 
 ### Implementing the `charAt` Method
 Implement `charAt` which returns the character at a specific index. This method requires new instance variables *to meet performance characteristics.*
@@ -241,7 +244,9 @@ Implement `charAt` which returns the character at a specific index. This method 
 
 This method returns the character at the specified index if that's a valid index, and throws an `IndexOutOfBoundsException` otherwise. A naive implementation of this method would start at the beginning of the linked list, the node referenced by `myFirst` and count characters until the `index`-th character is found. Note that you will need to loop *both* through the nodes, *and* through the characters within each node. 
 
-For full credit, your `charAt` method should be more efficient. Specifically, you should maintain *state* (in this case, storing information in instance variables) so that after a call of `charAt(k)` the call of `charAt(k+1)` is a constant time operation.
+For full credit, your `charAt` method should be more efficient. Specifically, you should maintain *state* (in this case, storing information in instance variables) so that after a call of `charAt(k)` the call of `charAt(k+1)` is a constant time operation. **This efficiency, so that a loop over indexes in
+order is fast (as well as correct) is worth a small part of the overall
+programming part of your grade.**
 
 ### Basic, Correct but Inefficient Implementation of charAt
 First we'll show an inefficient implementation of the charAt method --- a method to find a character at a specific index in a linked list of strings. Your code will need to traverse the linked list counting characters. The code below illustrates how to do this. It doesn't check to see if parameter index is valid, but it passes the JUnit tests for correctness.
@@ -263,7 +268,7 @@ public int charAt(int index) {
 }
 ```
 
-This code will pass correctness tests, e.g., in `TestIterator`. However, it's not efficient since it starts at the beginning of the linked list for each call. You should be sure you understand how local variables `count` and `dex` are used in the code above before trying to make the code more efficient. You'll work to make the code efficience for a sequence of calls in which index is incremented by one, e.g., `.charAt(k)` followed by `.charAt(k+1)` by ensuring you appropriately update the following  instance variables: one for the current node in a sequence of calls of `charAt`, one for the current index into that node, and one for the overall count; these are explained below. 
+This code will pass correctness tests, e.g., in `TestIterator`. However, it's not efficient since it starts at the beginning of the linked list for each call.  **You should be sure you understand how local variables `count` and `dex` are used in the code above before trying to make the code more efficient.** You'll work to make the code efficience for a sequence of calls in which the index is incremented by one, e.g., `.charAt(k)` followed by `.charAt(k+1)` by ensuring you appropriately update the following  instance variables: one for the current node in a sequence of calls of `charAt`, one for the current index into that node, and one for the overall count; these are explained below. 
 
 - `myIndex` is the value of the parameter in the _last call_ to `charAt`. This means that if a call to `s.charAt(100)` is followed by `s.charAt(101)` the value of `myIndex` will be 100 after `s.charAt(100)` executes and `myIndex` will be 101 after `s.charAt(101)` executes.
 - `myLocalIndex` is the value of the index *within the string stored in the node last-referenced* by `charAt` when the method finishes. For example, suppose a strand consists of three nodes: the first has 60 characters; followed by a node of 30 characters; followed by a node of 40 characters. The call `s.charAt(40)` will mean that `myIndex` is 40 and `myLocalIndex` is also 40 since that's the index within the first node of the list, where the character whose index is 40 is found.  Suppose this is followed by `s.charAt(70).` The character at index 60 of the entire strand will be the character with index zero of the second node -- since the first node holds characters with indexes 0-59 since its info field is a string of 60 characters. The character at index 70 of the entire strand will be the character with index 10 of the second node. This means that after the call `charAt(70)` the value of `myIndex` will be 70, the value of `myLocalIndex` will be 10, and the value of `myCurrent` (see just below) is a pointer to the second node of a three-node list.
