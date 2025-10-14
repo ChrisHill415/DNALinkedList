@@ -130,7 +130,7 @@ Implement two constructors: one with no parameters (the default constructor) and
 
 You should start by defining a `private` inner `Node` class (that is, defined inside of the `LinkStrand` class) that defines a node in the `LinkStrand`. Each such node should store at least a `String` (referred to as `info` in this writeup) and a reference to the next node in the list. You will also need to define a constructor for your inner `Node` class.
 
-After you have defined your node class, you should use the following instance variables definitions for the `ListStrand` class.
+After you have defined your node class, you should use the following instance variables definitions for the `LinkStrand` class.
 
 ```java
 private Node myFirst, myLast;
@@ -313,7 +313,7 @@ Note that the `IDnaStrand` object referenced by `this` is then stored in the `Ch
 You only need to implement `charAt`, then *all the code described and shown above will work correctly!* You will need to initialize the instance variables too.
 
 ### Order of Calls Matters
-However, *you'll need to write code to deal with calls that aren't "in order".* If the call `.charAt(100)` is followed by the call `.charAt(30)` you'll need to start at the beginning of the internal linked list to find the character with index 30. If `.charAt(100)` is followed by `.charAt(350)` you won't start at the first node, but continue with the values stored in the instance variables. To start at the beginning/first-node, you'll re-initialize the three variables `myIndex`, `myLocalIndex`, and `myCurrent` as you did in the constructor for `ListStrand`, i.e., so that your code starts at the beginning of the internal linked list.
+However, *you'll need to write code to deal with calls that aren't "in order".* If the call `.charAt(100)` is followed by the call `.charAt(30)` you'll need to start at the beginning of the internal linked list to find the character with index 30. If `.charAt(100)` is followed by `.charAt(350)` you won't start at the first node, but continue with the values stored in the instance variables. To start at the beginning/first-node, you'll re-initialize the three variables `myIndex`, `myLocalIndex`, and `myCurrent` as you did in the constructor for `LinkStrand`, i.e., so that your code starts at the beginning of the internal linked list.
 
 ## Complexity of LinkStrand method `cutAndSplice`
 
