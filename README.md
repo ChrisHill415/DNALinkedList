@@ -48,7 +48,7 @@ The simulation is a simplification of the chemical process, but provides an exam
 ### Early Engagement Benchmark Points
 
 You need to run the `DNABenchmark` (see below) code before you
-write the `LinnkStrand` implementation. If you copy/paste results
+write the `LinkStrand` implementation. If you copy/paste results
 and answer two questions about them before the no-penalty deadline
 you can eary four engagement points. Complete [the form here](https://forms.cloud.microsoft/r/bcsSZ9kfjj).
  
