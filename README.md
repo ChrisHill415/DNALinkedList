@@ -61,7 +61,8 @@ different classes model DNA by implementing the `IDnaStrand` interface.
 
 ## Part 1: Running DNABenchmark, Profiling, Analysis
 
-You can do this Part 1 _without writing any linked list code_. We encourage you do this before starting on Part 2 of the assignment where you will program a linked list. *There is an engagement bonus for submitting timing of Part 1 before Fall Break!* **Four engagement points on this project for submitting timing data if you simply copy/paste the results of running `DNABenchmark` twice -- with `StringStrand` and again with `StringBuilderStrand` which you can do by commenting/uncommenting lines at the top of the `DNABenchmark.java` file, lines 17-20.** You can think about the analysis for this part, but simply pasting the results of the output will get the three points. Submit [output results using this form](https://forms.cloud.microsoft/r/bcsSZ9kfjj)
+You can do this Part 1 _without writing any linked list code_. We encourage you do this before starting on Part 2 of the assignment where you will program a linked list. *There is an engagement bonus for submitting timing of Part 1 
+before October 24!* **Four engagement points on this project for submitting timing data if you simply copy/paste the results of running `DNABenchmark` twice -- with `StringStrand` and again with `StringBuilderStrand` which you can do by commenting/uncommenting lines at the top of the `DNABenchmark.java` file, lines 17-20.** You can think about the analysis for this part, but simply pasting the results of the output will get the three points. Submit [output results using this form](https://forms.cloud.microsoft/r/bcsSZ9kfjj)
 
 ### `cutAndSplice` Simulation Complexity with `StringStrand` an `StringBuilderStrand`
 
