@@ -112,7 +112,9 @@ Recall that `DNABenchmark` simulates a splicing experiment with DNA data. The co
 
 ### Analysis Questions
 
-Once you have completed benchmarking, answer the following analysis questions. **Include your answers in the PDF you submit to the analysis assignment for Project 3 in Gradescope.** You can and should complete most of these questions even if you are unable to complete the code for the `LinkStrand` class.
+Once you have completed benchmarking, answer the following analysis questions. **Include your answers in the PDF you submit to the 
+analysis assignment for Project 3 in Gradescope.** You can and should complete most of these questions even if you are unable to complete the 
+code for the `LinkStrand` class.
 
 [Template for Answering Analysis Questions](https://courses.cs.duke.edu/compsci201/fall25/assign/p3-analysis.docx).
 
