@@ -249,7 +249,7 @@ First we'll show an inefficient implementation of the charAt method --- a method
 ```
 public int charAt(int index) {
   int count = 0;
-	int dex = 0;
+  int dex = 0;
 	Node list = myFirst;
 	while (count != index) {
 		count++;
