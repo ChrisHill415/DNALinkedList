@@ -5,19 +5,16 @@ use and write, are part of this document.
 
 ## Starter Code and Using Git
 
+## Starter Code and Using Git
+
 **_You should have installed all software (Java, Git, VS Code) before completing this project._** You can find 
-the [directions for installation here](https://coursework.cs.duke.edu/201fall25/resources-201/-/blob/main/installingSoftware.md) (including workarounds for submitting without Git if needed).
+the [directions for installation here](https://coursework.cs.duke.edu/201spring26/resources-201/-/blob/main/installingSoftware.md) (including workarounds for submitting without Git if needed).
 
 We'll be using Git and the installation of GitLab at [coursework.cs.duke.edu](https://coursework.cs.duke.edu). All code for classwork will be kept here. Git is software used for version control, and GitLab is an online repository to store code in the cloud using Git.
 
-**[This document details the
-workflow](https://coursework.cs.duke.edu/201fall25/resources-201/-/blob/main/projectWorkflow.md)
-for downloading the starter code for the project, updating your code
-on coursework using Git, and ultimately submitting to Gradescope for
-autograding.** We recommend that you read and follow the directions
-carefully this first time working on a project! While coding, we
-recommend that you periodically (perhaps when completing a method or
-small section) push your changes as explained in Section 5.
+
+**[This document details the workflow](https://coursework.cs.duke.edu/201spring26/resources-201/-/blob/main/projectWorkflow.md) for downloading the starter code for the project, updating your code on coursework using Git, and ultimately submitting to Gradescope for autograding.**  We recommend that you read and follow the directions carefully this first time working on a project! While coding, 
+we recommend that you periodically (perhaps when completing a method or small section) push your changes.
 
 
 ## DNA strands and the Starter Code
@@ -26,7 +23,7 @@ For the purposes of this project, DNA is represented as a sequence of characters
 
 To get started you should read the comments in the `IDnaStrand` interface to understand what functionality implementations of that interface should provide with respect to manipulating DNA data. You will note that some methods in the interface have a `default` implementation provided, but most do not -- these are the methods you will be implementing. The `default` method `cutAndSplice` is the one that is benchmarked by the code provided in `DNABenchmark`, see [Part 1](#part-1-running-dnabenchmark-profiling-analysis) for a discussion of that method and its complexity.
 
-Two relatively straightforward implementations of the `IDnaStrand` interface are provided in the starter code. `StringStrand` represents a DNA sequence as a simple String. `StringBuilderStrand` represents a DNA sequence as a  [`StringBuilder`](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/StringBuilder.html). You can look at these two classese to see simple and correct (but not necessarily efficient) implementations of the functionality specified in the `IDnaStrand` interface.
+Two relatively straightforward implementations of the `IDnaStrand` interface are provided in the starter code. `StringStrand` represents a DNA sequence as a simple String. `StringBuilderStrand` represents a DNA sequence as a  [`StringBuilder`](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/StringBuilder.html). You can look at these two classes to see simple and correct (but not necessarily efficient) implementations of the functionality specified in the `IDnaStrand` interface.
 
 ## Complexity of cutAndSplice
 
@@ -147,7 +144,7 @@ private int myLocalIndex;
 3. `mySize` represents the total number of characters stored in all nodes together.
 4. `myAppends` is the number of times that the append method has been called. It might be useful to think of this as one less than the number of nodes in the linked list.
 
-The following instance variables will be updated in `charAt()`:
+The following instance variables will be updated in `charAt()` _when it is implemented efficiently_:
 1. `myIndex` tracks the last character we accessed with the `charAt()` method. Initialize this as `0`.
 2. `myCurrent` tracks the last node holding the character at position `myIndex`. Initialize this as `myFirst`.
 3. `myLocalIndex` tracks the last character we accessed within the `Node`. Initialize `this` as `0`.
@@ -158,7 +155,7 @@ Initially, when the `LinkStrand("cgatt...")` constructor is called  (though the 
   <img src="figures/initialize.png">
 </div>
 
-As described above, you'll create two constructors. The string constructor should consist of one call to initialize which establishes the class invariant with a single node representing the entire strand of DNA as illustrated. The no-argument constructor, also called the default constructor, should have one line: `this("")`  --- this calls the one-parameter constructor with a String parameter of `""`. 
+As described above, you'll create two constructors. The string constructor should consist of one call to initialize which establishes the class invariant with a single node representing the entire strand of DNA as illustrated. The no-argument constructor, also called the default constructor, should have one line: `this("")`  --- which calls the one-parameter constructor with a String parameter of `""`. 
 
 The `initialize` method will initialize instance variables and maintain the class invariants when it's called. Create a one-node list
 in `initialize` and make sure that both `myFirst` and `myLast` reference/point to this Node. That will ensure part of the class invariant
@@ -253,7 +250,7 @@ First we'll show an inefficient implementation of the charAt method --- a method
 
 ```java
 public int charAt(int index) {
-     int count = 0;
+  int count = 0;
 	int dex = 0;
 	Node list = myFirst;
 	while (count != index) {
@@ -268,7 +265,7 @@ public int charAt(int index) {
 }
 ```
 
-This code will pass correctness tests, e.g., in `TestIterator`. However, it's not efficient since it starts at the beginning of the linked list for each call.  **You should be sure you understand how local variables `count` and `dex` are used in the code above before trying to make the code more efficient.** You'll work to make the code efficience for a sequence of calls in which the index is incremented by one, e.g., `.charAt(k)` followed by `.charAt(k+1)` by ensuring you appropriately update the following  instance variables: one for the current node in a sequence of calls of `charAt`, one for the current index into that node, and one for the overall count; these are explained below. 
+This code will pass correctness tests, e.g., in `TestIterator`. However, it's not efficient since it starts at the beginning of the linked list for every call.  **You should be sure you understand how local variables `count` and `dex` are used in the code above before trying to make the code more efficient.** You'll work to make the code efficience for a sequence of calls in which the index is incremented by one, e.g., `.charAt(k)` followed by `.charAt(k+1)` by ensuring you appropriately update the following  instance variables: one for the current node in a sequence of calls of `charAt`, one for the current index into that node, and one for the overall count; these are explained below. 
 
 - `myIndex` is the value of the parameter in the _last call_ to `charAt`. This means that if a call to `s.charAt(100)` is followed by `s.charAt(101)` the value of `myIndex` will be 100 after `s.charAt(100)` executes and `myIndex` will be 101 after `s.charAt(101)` executes.
 - `myLocalIndex` is the value of the index *within the string stored in the node last-referenced* by `charAt` when the method finishes. For example, suppose a strand consists of three nodes: the first has 60 characters; followed by a node of 30 characters; followed by a node of 40 characters. The call `s.charAt(40)` will mean that `myIndex` is 40 and `myLocalIndex` is also 40 since that's the index within the first node of the list, where the character whose index is 40 is found.  Suppose this is followed by `s.charAt(70).` The character at index 60 of the entire strand will be the character with index zero of the second node -- since the first node holds characters with indexes 0-59 since its info field is a string of 60 characters. The character at index 70 of the entire strand will be the character with index 10 of the second node. This means that after the call `charAt(70)` the value of `myIndex` will be 70, the value of `myLocalIndex` will be 10, and the value of `myCurrent` (see just below) is a pointer to the second node of a three-node list.

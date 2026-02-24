@@ -1,6 +1,6 @@
 # Project 3: DNA
 
-This is the directions document for Project 3 DNA in CompSci 201 at Duke University, Fall 2025.
+This is the directions document for Project 3 DNA in CompSci 201 at Duke University, Spring 2026.
 
 **See [the details document](docs/details.md) for information** on using Git, starting the project, and more details about the project including information about the classes and concepts that are outlined briefly below. You'll absolutely need to read the information in the [details document](docs/details.md) to understand how the classes in this project work independently and together. The _details_ document also contains project-specific details, this document provides a high-level overview of the assignment.
 
@@ -14,7 +14,7 @@ Here are the major parts of the assignment.
 1. In [Part 1](#part-1-running-dnabenchmark-profiling-analysis) you will run the benchmarking program before you write code as part of answering questions in the analysis section.
 2. In [Part 2](#part-2-programming) You will create a new class `LinkStrand` that implements the `IDnaStrand` interface. It will utilize a singly linked-list to store the strand information rather than a `String` or `StringBuilder`.
 	1. You'll create an inner `Node` class with instance variables `myFirst` and `myLast` and you'll then implement all the methods in the `IDnaStrand` interface, _**testing them using supplied JUnit tests.**_ 
-	2. When you create the class and edit it so that it implements IDnaStrand, VSCode can fill in stub methods that you will implement. There are two constructors and several methods. You should read the comments in the `IDnaStrand` interface and use the existing implementations `StringStrand` and `StringBuilderStrand` to understand what these methods do. 
+	2. When you create the class and edit it so that it implements `IDnaStrand`, VSCode can fill in stub methods that you will implement. There are two constructors and several methods. You should read the comments in the `IDnaStrand` interface and use the existing implementations `StringStrand` and `StringBuilderStrand` to understand what these methods do. 
 3. In [Part 3](#part-3-analysis-and-more-benchmarking) Rerun the benchmarking program `DNABenchmark` with the newly coded `LinkStrand` class - note the efficiency and memory of the program compared to when you ran the program with StringStrand and StringBuilderStrand.
 4. You might make changes to `DNABenchmark` to run additional benchmark code to answer questions in the analysis.
 
@@ -43,14 +43,13 @@ Kary Mullis, the inventor of PCR, is an interesting character. To see more about
 
 The simulation is a simplification of the chemical process, but provides an example of the utility of linked lists in implementing a data structure. The linked list code you'll write and reason about is an example of a chunk list.
 
-**For pre-coding engagement points (six): Read three (or more) of the articles/works above about Kary Mullis and PCR and then [complete this form](https://forms.cloud.microsoft/r/jBdyRwkDqU).** You can complete this anytime before the final deadline for the assignment.
+**For pre-coding engagement points (six): Read three (or more) of the articles/works above about Kary Mullis and PCR and then [complete this form](https://forms.office.com/r/jENpF8s54S).** You can complete this anytime before the final deadline for the assignment.
 
 ### Early Engagement Benchmark Points
 
 You need to run the `DNABenchmark` (see below) code before you
 write the `LinkStrand` implementation. If you copy/paste results
-and answer two questions about them before the no-penalty deadline
-you can eary four engagement points. Complete [the form here](https://forms.cloud.microsoft/r/bcsSZ9kfjj).
+and answer two questions about them before Tuesday, March 3 midnight. Complete [the form here](https://forms.office.com/r/Bby977zYYe).
  
 
 ## DNA strands and the Starter Code
@@ -62,7 +61,7 @@ different classes model DNA by implementing the `IDnaStrand` interface.
 ## Part 1: Running DNABenchmark, Profiling, Analysis
 
 You can do this Part 1 _without writing any linked list code_. We encourage you do this before starting on Part 2 of the assignment where you will program a linked list. *There is an engagement bonus for submitting timing of Part 1 
-before October 24!* **Four engagement points on this project for submitting timing data if you simply copy/paste the results of running `DNABenchmark` twice -- with `StringStrand` and again with `StringBuilderStrand` which you can do by commenting/uncommenting lines at the top of the `DNABenchmark.java` file, lines 17-20.** You can think about the analysis for this part, but simply pasting the results of the output will get the three points. Submit [output results using this form](https://forms.cloud.microsoft/r/bcsSZ9kfjj)
+before March 3 (midnight)!* **Four engagement points on this project for submitting timing data if you simply copy/paste the results of running `DNABenchmark` twice -- with `StringStrand` and again with `StringBuilderStrand` which you can do by commenting/uncommenting lines at the top of the `DNABenchmark.java` file, lines 17-20.** You can think about the analysis for this part, but simply pasting the results of the output will get the three points. Submit [output results using this form](https://forms.office.com/r/Bby977zYYe)
 
 ### `cutAndSplice` Simulation Complexity with `StringStrand` an `StringBuilderStrand`
 
@@ -116,7 +115,7 @@ Once you have completed benchmarking, answer the following analysis questions. *
 analysis assignment for Project 3 in Gradescope.** You can and should complete most of these questions even if you are unable to complete the 
 code for the `LinkStrand` class.
 
-[Template for Answering Analysis Questions](https://courses.cs.duke.edu/compsci201/fall25/assign/p3-analysis.docx).
+[Template for Answering Analysis Questions](https://courses.cs.duke.edu/compsci201/spring26/assign/p3-analysis.docx).
 
 The following questions refer to the parameters:
 - N: the size of the original dna strand,
@@ -153,13 +152,7 @@ Don't forget to upload a PDF for the analysis part of this assignment and mark w
 | Points | Grading Criteria |
 | ------ | ------ |
 | 16 | Code for LinkStrand. This includes 4 for correct and efficient implementation of .charAt method, as well as 2 for API consistency. |
-| 10 | Analysis questions answered. UTAs will grade and comment on this.  |
+| 15 | Analysis questions answered. UTAs will grade and comment on this.  |
 
-
-We will map total points you earn to scores as follows. For example, 24 is an A- and 30 is an A+.
-- 22-26:  A
-- 17-21:  B
-- 12-16:  C
-- 6-11:  D
 
 
