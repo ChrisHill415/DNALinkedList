@@ -250,16 +250,16 @@ First we'll show an inefficient implementation of the charAt method --- a method
 public int charAt(int index) {
   int count = 0;
   int dex = 0;
-	Node list = myFirst;
-	while (count != index) {
-		count++;
-		dex++;
-		if (dex >= list.info.length()) {
-			dex = 0;
-			list = list.next;
-		}
-	}
-     return list.info.charAt(dex);
+  Node list = myFirst;
+  while (count != index) {
+	  count++;
+	  dex++;
+	  if (dex >= list.info.length()) {
+		  dex = 0;
+		  list = list.next;
+	  }
+  }
+  return list.info.charAt(dex);
 }
 ```
 
