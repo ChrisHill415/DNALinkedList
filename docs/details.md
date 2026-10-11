@@ -11,8 +11,6 @@ We'll be using Git and the installation of GitLab at [coursework.cs.duke.edu](ht
 
 **[This document details the workflow](https://coursework.cs.duke.edu/201fall26/resources-201/-/blob/main/projectWorkflow.md) for downloading the starter code for the project, updating your code on coursework using Git, and ultimately submitting to Gradescope for autograding.** We recommend that you read and follow the directions carefully this first time working on a project! While coding, we recommend that you periodically (perhaps when completing a method or small section) push your changes.
 
-Here's a high-level view of the assignment. This is enough information to know what to do, but not necessarily how to do it. For details, you can **refer to sections in [the details document](docs/details.md)**.
-
 You'll be developing `LinkStrand`, an implementation of the `IDnaStrand` interface that uses an internal linked list to model recombinant DNA. Your implementation will be much more efficient for modeling DNA splicing operations than using a `String` or `StringBuilder` as you will see in your empirical timing benchmarks.
 
 Here are the major parts of the assignment.
