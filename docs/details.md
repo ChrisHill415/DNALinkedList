@@ -1,18 +1,34 @@
 # Details for P3 DNA/LinkStrand
 
-Many parts of the assignment, including workflow and the classes you
-use and write, are part of this document.
+You should have already read the [README](../README.md) file to get a high-level overview of the project and early engagement points. The details here are needed to explain the classes you're given, the code you'll write, and the implementation details.
 
 ## Starter Code and Using Git
 
 **_You should have installed all software (Java, Git, VS Code) before completing this project._** You can find 
-the [directions for installation here](https://coursework.cs.duke.edu/201spring26/resources-201/-/blob/main/installingSoftware.md) (including workarounds for submitting without Git if needed).
+the [directions for installation here](https://coursework.cs.duke.edu/201fall26/resources-201/-/blob/main/installingSoftware.md) (including workarounds for submitting without Git if needed).
 
 We'll be using Git and the installation of GitLab at [coursework.cs.duke.edu](https://coursework.cs.duke.edu). All code for classwork will be kept here. Git is software used for version control, and GitLab is an online repository to store code in the cloud using Git.
 
+**[This document details the workflow](https://coursework.cs.duke.edu/201fall26/resources-201/-/blob/main/projectWorkflow.md) for downloading the starter code for the project, updating your code on coursework using Git, and ultimately submitting to Gradescope for autograding.** We recommend that you read and follow the directions carefully this first time working on a project! While coding, we recommend that you periodically (perhaps when completing a method or small section) push your changes.
 
-**[This document details the workflow](https://coursework.cs.duke.edu/201spring26/resources-201/-/blob/main/projectWorkflow.md) for downloading the starter code for the project, updating your code on coursework using Git, and ultimately submitting to Gradescope for autograding.**  We recommend that you read and follow the directions carefully this first time working on a project! While coding, 
-we recommend that you periodically (perhaps when completing a method or small section) push your changes.
+Here's a high-level view of the assignment. This is enough information to know what to do, but not necessarily how to do it. For details, you can **refer to sections in [the details document](docs/details.md)**.
+
+You'll be developing `LinkStrand`, an implementation of the `IDnaStrand` interface that uses an internal linked list to model recombinant DNA. Your implementation will be much more efficient for modeling DNA splicing operations than using a `String` or `StringBuilder` as you will see in your empirical timing benchmarks.
+
+Here are the major parts of the assignment.
+1. In [Part 1](#part-1-running-dnabenchmark-profiling-analysis) you will run the benchmarking program before you write code as part of answering questions in the analysis section.
+2. In [Part 2](#part-2-programming) You will create a new class `LinkStrand` that implements the `IDnaStrand` interface. It will utilize a singly linked-list to store the strand information rather than a `String` or `StringBuilder`.
+	1. You'll create an inner `Node` class with instance variables `myFirst` and `myLast` and you'll then implement all the methods in the `IDnaStrand` interface, _**testing them using supplied JUnit tests.**_ 
+	2. When you create the class and edit it so that it implements `IDnaStrand`, VSCode can fill in stub methods that you will implement. There are two constructors and several methods. You should read the comments in the `IDnaStrand` interface and use the existing implementations `StringStrand` and `StringBuilderStrand` to understand what these methods do. 
+3. In [Part 3](#part-3-analysis-and-more-benchmarking) Rerun the benchmarking program `DNABenchmark` with the newly coded `LinkStrand` class - note the efficiency and memory of the program compared to when you ran the program with StringStrand and StringBuilderStrand.
+4. You might make changes to `DNABenchmark` to run additional benchmark code to answer questions in the analysis.
+
+## Outline
+
+- [Part 1: Running DNABenchmark, Profiling, Analysis](#part-1-running-dnabenchmark-profiling-analysis)
+- [Part 2: Programming](#part-2-programming-linkstrand)
+- [Part 3: More Benchmarking and Analysis](#part-3-more-benchmarking-and-analysis)
+- [Submitting and Grading](#submitting-and-grading)
 
 
 ## DNA strands and the Starter Code
@@ -23,35 +39,18 @@ To get started you should read the comments in the `IDnaStrand` interface to und
 
 Two relatively straightforward implementations of the `IDnaStrand` interface are provided in the starter code. `StringStrand` represents a DNA sequence as a simple String. `StringBuilderStrand` represents a DNA sequence as a  [`StringBuilder`](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/StringBuilder.html). You can look at these two classes to see simple and correct (but not necessarily efficient) implementations of the functionality specified in the `IDnaStrand` interface.
 
-## Complexity of cutAndSplice
+## Part 1: Running DNABenchmark, Profiling, Analysis
 
-The method `cutAndSplice` is *not a mutator*. It starts with a strand of DNA and *creates a new strand* by finding each and every occurrence of a restriction enzyme like `“gaattc”` and replacing this enzyme by a specified splicee -- another strand of DNA. If `dna` represents the strand `"cgatcctagatcgg"` then the call 
+You can do this Part 1 _without writing any linked list code_. We encourage you do this before starting on Part 2 of the assignment where you will program using a linked list. *There is an engagement bonus for submitting timing of Part 1 
+before REPLACE DATE (midnight)!* **Four engagement points on this project for submitting timing data if you simply copy/paste the results of running `DNABenchmark` twice -- with `StringStrand` and again with `StringBuilderStrand` which you can do by commenting/uncommenting lines at the top of the `DNABenchmark.java` file, lines 17-20.** You can think about the analysis for this part, but simply pasting the results of the output will get the three points. Submit [output results using this form](https://forms.office.com/r/Bby977zYYe) **CHANGE THIS LINK **.
 
-```java
-dna.cutAndSplice("gat", "gggtttaaa")
-```
-
-would result in returning a new strand of DNA in which each occurrence of `"gat"` in `dna` is replaced by `"gggtttaaa"` -- as shown in the diagram below where the original strand is shown first, with the enzyme `"gat"` shaded in blue and the splicee `"gggtttaaa"` shaded in green. 
-
-<div align="center">
-  <img src="figures/splice.png">
-</div>
-
-```
-
-
-```
-
-The diagram illustrates how `cutAndSplice` works with both `StringStrand` and `StringBuilderStrand`. Each is a strand of 14 characters in which the restriction enzyme `"gat"` occurs twice, is replaced by `"gggtttaaa"`, resulting in creating and returning a new strand that contains 26 characters.
-
-Note that if the original strand has size N, then the new strand has size N + b(S-E) where b is the number of breaks, or occurrences of the enzyme, S is the length of the splicee and E is the length of the enzyme. If we assume the splicee is large, as it will be when benchmarking, we can ignore E and this becomes approximately N + bS, the size of the recombinant new strand in terms. 
-
-The runtime and memory complexity for `cutAndSplice` can be expressed as a function of N, b, and S. The complexity also depends on the implementation used for the `IDnaStrand` interface. Of particular importance for the runtime complexity is the efficiency of the `append` method, which you will note is called repeatedly by `cutAndSplice`. For the memory complexity, the question is how the implementation represents the resulting recombinant Strand.
-
-## Part 1 Running DNABenchmark
 
 You select which implementation to use changing the value of the static instance variable `strandType` at the top of the class file. Note that the `StringStrand` class may take a few minutes to run on on the memory exhaustion part
 of the benchmark. `StringBuilderStrand` scales better, but you may not want to run `StringStrand` on the larger data file for memory exhaustion if your laptop is old --- just explain this in your analysis documents/benchmark results.
+
+### Benchmarking `StringStrand` and `StringBuilderStrand`
+
+You'll need to run the `main` method of the `DNABenchmark` twice, once for the `StringStrand` implementation of the `IDnaStrand` interface and once for the `StringBuilderStrand` implementation. By default, the program will benchmark the runtime of `cutAndSplice` on the `ecoli_small.txt` file. Make sure to save your results for answering analysis questions later.
 
 The main method benchmarks the average time (over several trials)  in milliseconds that it takes to run `cutAndSplice` for different values of N (the size of the original dna strand), b (the number of breaks / occurrences of the `enzyme`), and S (the size of the `splicee`). It also shows the size of the resulting recombininant new Strand, labeled as `recomb`, which is roughly equal to N + bS. 
 
@@ -108,6 +107,61 @@ StringBuil:   5,122,560      10,000    12,318,240       161       720
 ```
 
 **Note, memory exhaustion benchmark results are not shown here.**
+
+### `cutAndSplice` Simulation Complexity with `StringStrand` an `StringBuilderStrand`
+
+The `main` method of `DNABenchmark` simulates a DNA splicing experiment represented by the `cutAndSplice` method (implemented in `IDnaStrand` with complexity that depends on which implementation of the interface is being used). The section below describes what this simulates and how to reason about its complexity using the provided starter implementations `StringStrand` and `StringBuilderStrand`.
+
+
+### Complexity of `cutAndSplice`
+
+The method `cutAndSplice` is *not a mutator*. It starts with a strand of DNA and *creates a new strand* by finding each and every occurrence of a restriction enzyme like `“gaattc”` and replacing this enzyme by a specified splicee -- another strand of DNA. If `dna` represents the strand `"cgatcctagatcgg"` then the call 
+
+```java
+   IDnaStrand strand = dna.cutAndSplice("gat", "gggtttaaa")
+```
+
+would result in returning a new strand of DNA in which each occurrence of `"gat"` in `dna` is replaced by `"gggtttaaa"` -- as shown in the diagram below where the original strand is shown first, with the enzyme `"gat"` shaded in blue and the splicee `"gggtttaaa"` shaded in green. The returned object has the same type as `dna`, e.g., `StringStrand`, `StringBuilderStrand`, or `LinkStrand`.
+
+<div align="center">
+  <img src="figures/splice.png">
+</div>
+
+```
+
+
+```
+
+The diagram illustrates how `cutAndSplice` works with both `StringStrand` and `StringBuilderStrand`. Each is a strand of 14 characters in which the restriction enzyme `"gat"` occurs twice, is replaced by `"gggtttaaa"`, resulting in creating and returning a new strand that contains 26 characters.
+
+Note that if the original strand has size N, then the new strand has size N + b(S-E) where b is the number of breaks, or occurrences of the enzyme, S is the length of the splicee and E is the length of the enzyme. If we assume the splicee is large, as it will be when benchmarking, we can ignore E and this becomes approximately N + bS, the size of the recombinant new strand in terms. 
+
+The runtime and memory complexity for `cutAndSplice` can be expressed as a function of N, b, and S. The complexity also depends on the implementation used for the `IDnaStrand` interface. Of particular importance for the runtime complexity is the efficiency of the `append` method, which you will note is called repeatedly by `cutAndSplice`. For the memory complexity, the question is how the implementation represents the resulting recombinant Strand.
+
+## Part 2: Programming LinkStrand
+
+This section details how to implement the `LinkStrand` class.
+
+### LinkStrand implements IDnaStrand
+
+You will create a new class named `LinkStrand` from scratch. Start by creating a `LinkStrand.java` file in the `src` folder of the project. This class must implement the `IDnaStrand` interface as shown in the class header below:
+
+```java 
+public class LinkStrand implements IDnaStrand
+```
+
+VSCode will then indicate that the code will not compile. If you select the light bulb / suggestion button as indicated in the figure below, it should give you as the first suggestion to "add unimplemented methods." This will automatically generate method stubs for all of the methods in the `IDnaStrand` interface that any implementing class must provide. Of course, you can also add these method stubs yourself manually.
+
+<div align="center">
+  <img src="figures/vscode_stubs.png" width="300", height="150">
+</div>
+ 
+In addition, you need to implement two constructors **as described below.
+The constructors and methods don't need to be implemented in the order shown there, but the simpler methods are listed first. These methods are tested in the `TestStrand` class.
+
+You should test each method as you implement it using the `TestStrand` JUnit test class. You'll need to change the type of strand returned in that JUnit class method `getNewStrand` to test your class. _The tests will NOT work correctly_ until you've implemented `LinkStrand.toString()`.
+
+
 
 ## Part 2: Programming LinkStrand
 
@@ -210,6 +264,7 @@ For more guidance on `StringBuilder`, see the [Java Documentation here](https://
 You should be able to test all the methods implemented to this point using the class `TestStrand`. The testing methods in `TestStrand` rely on `.toString` being correct, so after implementing `.toString` you may find errors in your other methods as a result of testing.
 
 ### 5. Implementing the `reverse` Method
+
 Implement `reverse` to return a new `LinkStrand` object that's the reverse of the object on which it's called. **This method is not a mutator, it creates a new `LinkStrand`.**
 
 #### Details on Implementing the reverse Method
@@ -233,9 +288,10 @@ The easiest way (and an efficient way) to reverse a `String` in Java is to use [
 **Be sure to update all instance variables of the new reversed `LinkStrand` you are creating to be correct before it is returned.** You may need to do this directly by assigning values to the instance variables of the new `LinkStrand` object. *Recall that you can access the private instance variables of the new `LinkStrand` object being returned!* In particular, remember to update `mySize` and `myAppends` of the _newly created_ `LinkStrand` object.
 
 ### Implementing the `charAt` Method
+
 Implement `charAt` which returns the character at a specific index. This method requires new instance variables *to meet performance characteristics.*
 
-#### Details on Implementing the charAt Method
+#### Details on Implementing the `charAt` Method
 
 This method returns the character at the specified index if that's a valid index, and throws an `IndexOutOfBoundsException` otherwise. A naive implementation of this method would start at the beginning of the linked list, the node referenced by `myFirst` and count characters until the `index`-th character is found. Note that you will need to loop *both* through the nodes, *and* through the characters within each node. 
 
@@ -243,7 +299,8 @@ For full credit, your `charAt` method should be more efficient. Specifically, yo
 order is fast (as well as correct) is worth a small part of the overall
 programming part of your grade.**
 
-### Basic, Correct but Inefficient Implementation of charAt
+### Basic, Correct but Inefficient Implementation of `charAt`
+
 First we'll show an inefficient implementation of the charAt method --- a method to find a character at a specific index in a linked list of strings. Your code will need to traverse the linked list counting characters. The code below illustrates how to do this. It doesn't check to see if parameter index is valid, but it passes the JUnit tests for correctness.
 
 ```
@@ -331,5 +388,55 @@ For this example, the `LinkStrand` result is diagrammed below.
 Each time the original strand, a single string, is cut/spliced a new node is created. The new nodes for the `splicee` can all have `String info` referencing the same `String` object in memory, as shown in the diagram for the second and fourth nodes. These represent the first and second occurrences of `"gat"`, respectively. Note that this means `LinkStrand` only needs to represent the `splicee` string once, however many times it is being spliced in / however many breaks there are.
 
 This diagram represents the final `LinkStrand` object after a cut-and-splice operation. That strand is created by the `default cutAndSplice` implementation that calls `toString`, `getInstance`, and `append` which in `LinkStrand` ultimately result in a sequence of nodes as shown here --- mostly because of how `append` works.
+
+## Part 3: More Benchmarking and Analysis
+
+In [Part 1](#part-1-running-dnabenchmark-profiling-analysis) you benchmarked the complexity of the `cutAndSplice` method of the `IDnaStrand` interface using two implementations of that interface provided in the starter code: `StringStrand` and `StringBuilderStrand`. You did this using the main method of `DNABenchmark`. Review the details there for how to run these benchmarks and what they mean.
+
+Now that you have completed your implementation of `LinkStrand`, you should run the  `DNABenchmark` using the `LinkStrand` implementation of the `IDnaStrand` interface. Again use the `ecoli_small.txt` file (except in the memory
+exhaustion section which uses the larger `ecoli.dat`). Remember to save your results. Once you finish, you should have a total of 3 benchmark results: one for each of the three implementations (`StringStrand`, `StringBuilderStrand`, and `LinkStrand`).
+
+Recall that `DNABenchmark` simulates a splicing experiment with DNA data. The complexity of the `StringStrand` and `StringBuilderStrand` implementations was discussed earlier in [Part 1](#part-1-running-dnabenchmark-profiling-analysis). **See [the details document](docs/details.md) for a detailed explanation of the complexity** of the three `IDNAStrand` implementations, including the `LinkStrand` implementation of `cutAndSplice` as well as the explanation below in the _Analysis Questions_ section.
+
+
+### Analysis Questions
+
+Once you have completed benchmarking, answer the following analysis questions. **Include your answers in the PDF you submit to the 
+analysis assignment for Project 3 in Gradescope.** You can and should complete most of these questions even if you are unable to complete the 
+code for the `LinkStrand` class.
+
+[Template for Answering Analysis Questions](https://courses.cs.duke.edu/compsci201/spring26/assign/p3-analysis.docx).
+
+The following questions refer to the parameters:
+- N: the size of the original dna strand,
+- b: the number of breaks / occurrences of the `enzyme`, and 
+- S: the size of the `splicee`.  
+
+Several questions refer to the runtime complexity of the `cutAndSplice` method. You may _assume the following_ about this method:
+- The loop that searches for occurrences of `enzyme` using `indexOf` is O(N) for a strand with N nucleotides/length == N.
+- The size of the enzyme is negligibly small, i.e., you can ignore subtracting the size of the enzymes from the length/runtime of the results.
+- The fragments of the original strand between each added splicee are all approximately the same length, roughly N/b.
+
+Note that given these assumptions the original strand has length N, and the newly constructed strand has length N + bS, since each of b neglibly small occurrences of `enzyme` are replaced by a `splicee` whose size is S. Simply appending/concatenating a String of size S to a `StringBuilder` b times will take runtime O(bS) given what we've discussed in class about how `StringBuilder` works.  However, as we discussed in class, appending a String S to a `String` 
+b times results in creating Strings S, SS, SSS, SSSS, and so on (ignoring what comes between the splicees for now). This happens b times, so the last String has b occurrences of S and the total runtime is SSS..S (b times) so the total time to create all strings is (1+2+...+b)S which is O(b<sup>2</sup>S). When `LinkStrand` is used, be attentative to the diagram **at the end of [the details document](docs/details.md) document for information** that will help you reason about the runtime and the storage used.
+
+**Question 1:** What is the big O asymptotic runtime complexity of `cutAndSplice` when using `StringStrand`, in terms of N, b, and S? Justify your answer in theory, referencing the implementation, and empirically, by reporting and discussing your results from running `DNABenchmark`. Do your empirical results match your theoretical expectations? Briefly explain.
+
+**Question 2:** What is the big O asymptotic runtime complexity of `cutAndSplice` when using `StringBuilderStrand`, in terms of N, b, and S? Justify your answer in theory, referencing the implementation, and empirically, by reporting and discussing your results from running `DNABenchmark`. Do your empirical results match your theoretical expectations? Briefly explain.
+
+**Question 3:** If each character of a `String` takes 1 byte of memory to store, about how much total memory is necessary to store the result of a `cutAndSplice` operation on a `StringStrand` object? Express your answer in terms of N, b, and S. Would the result take more or less memory if using a `StringBuilderStrand` object? Briefly explain.
+
+**Question 4:** What is the big-Oh asymptotic runtime complexity of `cutAndSplice` when using `LinkStrand` in terms of N, b, and S? Justify your answer in theory, referencing the implementation, and empirically, by reporting your results from running `DNABenchmark`. Do your empirical results match your theoretical expectations? Briefly explain.
+
+**Question 5:** If each character of a `String` takes 1 byte of memory to store, and each reference to a node takes 8 bytes of memory to store, about about how much total memory is necessary to store the result of a `cutAndSplice` operation on a `LinkStrand` object? Express your answer in terms of N, b, and S. Briefly explain your answer, referencing the implementation of `LinkStrand`. 
+
+## Submitting and Grading 
+
+You will submit the assignment on Gradescope. Please take note that changes/commits on GitLab are NOT automatically synced to Gradescope. You are welcome to submit as many times as you like, only the most recent submission will count for a grade.
+
+Don't forget to upload a PDF for the analysis part of this assignment and mark where you answer each question. This is a separate submission in Gradescope.
+
+
+
 
 
