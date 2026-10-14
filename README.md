@@ -13,23 +13,23 @@ Specifically, you will develop a `LinkStrand` class, an implementation of the `I
 
 The simulation coded here is a simplification of the chemical process, but provides an example of the utility of linked lists as a data structure for certain algorithmic processes.
 
-### Engagement Points: Optional Historical Details
+### Engagement Points: Optional Historical Details (8 points)
 
 This background is interesting, but not really needed to do the assignment. There are some good stories here, but if you want to get to the assignment, you can skip this section. However, *there are pre-project Engagement Points possible here.* 
 
 [Three scientists shared the Nobel Prize](http://nobelprize.org/nobel_prizes/medicine/laureates/1978/press.html) in 1978 for the discovery of restriction enzymes. They're also an essential part of the process called [PCR polymerase chain reaction](http://en.wikipedia.org/wiki/Polymerase_chain_reaction) which is one of the most significant discoveries/inventions in chemistry and for which Kary Mullis won/shared the Nobel Prize in 1993.
 
-Kary Mullis, the inventor of PCR, is an interesting character. To see more about him see this archived copy of a [1992 interview in Omni Magazine](https://web.archive.org/web/20010121194200/http://omnimag.com/archives/interviews/mullis.html) or his [personal website](http://karymullis.com/) which includes information about his autobiography Dancing Naked in the Mind Field, though you can read this free [Nobel autobiography](https://www.nobelprize.org/prizes/chemistry/1993/mullis/biographical/) as well. A copy of his autobiography may be accessible via [Dancing Naked in the Mind Field](https://pearl-hifi.com/11_Spirited_Growth/10_Health_Neg/04_Pandemics/01_AIDS/Dancing_Naked_in_the_Mind_Field.pdf) without copyright permission.
+Kary Mullis, the inventor of PCR, is an interesting character. To see more about him see this archived copy of a [1992 interview in Omni Magazine](https://web.archive.org/web/20010121194200/http://omnimag.com/archives/interviews/mullis.html) or his [personal website](http://karymullis.com/) which includes information about his autobiography Dancing Naked in the Mind Field, though you can read this free [Nobel autobiography](https://www.nobelprize.org/prizes/chemistry/1993/mullis/biographical/) as well. A copy of his autobiography may be accessible via [Dancing Naked in the Mind Field](https://pearl-hifi.com/11_Spirited_Growth/10_Health_Neg/05_Pandemics/AIDS/Mullis_1988__Dancing_Naked_in_the_Mind_Field_80pgs..pdf) without copyright permission.
 
 The simulation is a simplification of the chemical process, but provides an example of the utility of linked lists in implementing a data structure. The linked list code you'll write and reason about is an example of a chunk list.
 
-**For pre-coding engagement points (six): Read three (or more) of the articles/works above about Kary Mullis and PCR and then [complete this form](https://forms.office.com/r/jENpF8s54S).** You can complete this anytime before the final deadline for the assignment.
+**For pre-coding engagement points (six): Read three (or more) of the articles/works above about Kary Mullis and PCR and then [complete this form](https://forms.cloud.microsoft/r/i4tQ7xwMph).** You can complete this anytime before the final deadline for the assignment.
 
-### Early Engagement Benchmark Points
+### Early Engagement Benchmark Points (8 points)
 
 You need to run the `DNABenchmark` (see below) code before you
 write the `LinkStrand` implementation. If you copy/paste results
-and answer two questions about them before Tuesday, March 3 midnight. Complete [the form here](https://forms.office.com/r/Bby977zYYe).
+and answer two questions about them before Tuesday, March 3 midnight. Complete [the form here](https://forms.cloud.microsoft/r/JT479AcuhU).
  
 
 ### Grading
