@@ -40,7 +40,7 @@ Two relatively straightforward implementations of the `IDnaStrand` interface are
 ## Part 1: Running DNABenchmark, Profiling, Analysis
 
 You can do this Part 1 _without writing any linked list code_. We encourage you do this before starting on Part 2 of the assignment where you will program using a linked list. *There is an engagement bonus for submitting timing of Part 1 
-before REPLACE DATE (midnight)!* **Four engagement points on this project for submitting timing data if you simply copy/paste the results of running `DNABenchmark` twice -- with `StringStrand` and again with `StringBuilderStrand` which you can do by commenting/uncommenting lines at the top of the `DNABenchmark.java` file, lines 17-20.** You can think about the analysis for this part, but simply pasting the results of the output will get the three points. Submit [output results using this form](https://forms.office.com/r/Bby977zYYe) **CHANGE THIS LINK **.
+before Sunday, October 18 (midnight)!* **Eight engagement points on this project for submitting timing data if you simply copy/paste the results of running `DNABenchmark` twice -- with `StringStrand` and again with `StringBuilderStrand` which you can do by commenting/uncommenting lines at the top of the `DNABenchmark.java` file, lines 17-20.** You can think about the analysis for this part, but simply pasting the results of the output will get the engagement points. Submit [output results using this form](https://forms.cloud.microsoft/r/JT479AcuhU).
 
 
 You select which implementation to use changing the value of the static instance variable `strandType` at the top of the class file. Note that the `StringStrand` class may take a few minutes to run on on the memory exhaustion part
@@ -159,11 +159,7 @@ The constructors and methods don't need to be implemented in the order shown the
 
 You should test each method as you implement it using the `TestStrand` JUnit test class. You'll need to change the type of strand returned in that JUnit class method `getNewStrand` to test your class. _The tests will NOT work correctly_ until you've implemented `LinkStrand.toString()`.
 
-
-
-## Part 2: Programming LinkStrand
-
-You need to implement two constructors as described below.  The
+The two
 constructors and methods don't need to be implemented in the order
 shown there, but the simpler methods are listed first. These methods
 are tested in the `TestStrand` class, but you'll need to change the
@@ -403,7 +399,7 @@ Once you have completed benchmarking, answer the following analysis questions. *
 analysis assignment for Project 3 in Gradescope.** You can and should complete most of these questions even if you are unable to complete the 
 code for the `LinkStrand` class.
 
-[Template for Answering Analysis Questions](https://courses.cs.duke.edu/compsci201/spring26/assign/p3-analysis.docx).
+[Template for Answering Analysis Questions](https://courses.cs.duke.edu/current/compsci201/assign/p3-analysis.docx).
 
 The following questions refer to the parameters:
 - N: the size of the original dna strand,
