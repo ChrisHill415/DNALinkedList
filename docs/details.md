@@ -295,7 +295,7 @@ programming part of your grade.**
 
 ### Basic, Correct but Inefficient Implementation of `charAt`
 
-First we'll show an inefficient implementation of the charAt method --- a method to find a character at a specific index in a linked list of strings. Your code will need to traverse the linked list counting characters. The code below illustrates how to do this. It doesn't check to see if parameter index is valid, but it passes the JUnit tests for correctness. *In Gradescope, you'll need to throw an `IndexOutOfBoundsException` if parameter `index` is less than zero or too large (relative to `mySize`).*
+First we'll show an inefficient implementation of the charAt method --- a method to find a character at a specific index in a linked list of strings. Your code will need to traverse the linked list counting characters. The code below illustrates how to do this. It doesn't check to see if parameter index is valid, but it passes the JUnit tests for correctness. **In Gradescope, you'll need to throw an `IndexOutOfBoundsException` if parameter `index` is less than zero or too large (relative to `mySize`).**
 
 ```
 public int charAt(int index) {
